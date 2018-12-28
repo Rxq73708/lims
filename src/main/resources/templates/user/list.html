@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>部门信息</title>
+    <!-- 引入JQuery -->
+    <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.min.js"></script>
+    <!-- 引入EasyUI -->
+    <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+    <!-- 引入EasyUI的样式文件-->
+    <link rel="stylesheet" href="jquery-easyui-1.4.2/themes/default/easyui.css" type="text/css"/>
+    <!-- 引入EasyUI的图标样式文件-->
+    <link rel="stylesheet" href="jquery-easyui-1.4.2/themes/icon.css" type="text/css"/>
+</head>
+<body>
+<table id="dg" title="My Users" class="easyui-datagrid" style="width:550px;height:250px"
+       url="get_users.php"
+       toolbar="#toolbar"
+       rownumbers="true" fitColumns="true" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="firstname" width="50">First Name</th>
+        <th field="lastname" width="50">Last Name</th>
+        <th field="phone" width="50">Phone</th>
+        <th field="email" width="50">Email</th>
+    </tr>
+    </thead>
+</table>
+<div id="toolbar">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">New User</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Edit User</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Remove User</a>
+</div>
+</body>
+</html>

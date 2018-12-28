@@ -2,7 +2,6 @@ package cn.dsj.lims.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Description：
@@ -12,11 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @create 2018/12/26
  */
 @Controller
+@RequestMapping("/user")
 public class DeptController {
 
     @RequestMapping("/list")
     public String list(){
-        return "dept";
+        return "user/list";
     }
 
     @RequestMapping("/add")
