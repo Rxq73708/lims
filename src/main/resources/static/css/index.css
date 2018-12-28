@@ -1,0 +1,22 @@
+.panel-header.accordion-header{
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding-left: 20px;
+}
+.panel-title{
+    font-size: 15px;
+}
+ul,li{
+    height: 20px;
+    padding:5px;
+    font-size: 15px;
+    margin:0;
+    list-style:none;
+}
+a{
+    text-decoration:none;
+}
+.panel-body.accordion-body{
+
+}
