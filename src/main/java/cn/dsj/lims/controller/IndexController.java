@@ -18,4 +18,10 @@ public class IndexController {
         System.out.println("index..");
         return "index";
     }
+
+    @RequestMapping("/user")
+    public String user(){
+        System.out.println("user..");
+        return "user";
+    }
 }
