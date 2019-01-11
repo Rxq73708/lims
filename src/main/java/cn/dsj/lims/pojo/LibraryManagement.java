@@ -7,27 +7,27 @@ public class LibraryManagement {
     private String fileName;//文件名称
     private int employeeId;//上传人编号
     private Date uploadingDate;//上传日期
-    private  int type;//类别
-    private String fileContent;//文件内容
+    private int type;//类别
+    private String filePath;//文件内容
 
 
     public LibraryManagement() {
         super();
     }
-    public LibraryManagement(int id, String fileName, int employeeId, Date uploadingDate, int type, String fileContent) {
+    public LibraryManagement(int id, String fileName, int employeeId, Date uploadingDate, int type, String filePath) {
         this.id = id;
         this.fileName = fileName;
         this.employeeId = employeeId;
         this.uploadingDate = uploadingDate;
         this.type = type;
-        this.fileContent = fileContent;
+        this.filePath = filePath;
     }
-    public LibraryManagement(String fileName, int employeeId, Date uploadingDate, int type, String fileContent) {
+    public LibraryManagement(String fileName, int employeeId, Date uploadingDate, int type, String filePath) {
         this.fileName = fileName;
         this.employeeId = employeeId;
         this.uploadingDate = uploadingDate;
         this.type = type;
-        this.fileContent = fileContent;
+        this.filePath = filePath;
     }
     public int getId() {
         return id;
@@ -70,10 +70,10 @@ public class LibraryManagement {
     }
 
     public String getFileContent() {
-        return fileContent;
+        return filePath;
     }
 
-    public void setFileContent(String fileContent) {
-        this.fileContent = fileContent;
+    public void setFileContent(String filePath) {
+        this.filePath = filePath;
     }
 }
