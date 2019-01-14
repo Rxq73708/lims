@@ -1,0 +1,37 @@
+<!-- 引入框架 -->
+<div th:replace="frame::html"></div>
+<table id="dg">
+    <thead>
+    <tr>
+        <th field="id" width="50" sortable="true">编号</th>
+        <th field="fileName" width="50" editor="{type:'validatebox',options:{required:true}}">文件名</th>
+        <th field="employeeId" width="50" sortable="true" editor="{type:'validatebox',options:{required:true}}">上传人</th>
+        <th field="uploadingDate" width="50" editor="{type:'validatebox',options:{required:true}}">上传时间</th>
+        <th field="type" width="50" editor="{type:'validatebox',options:{required:true}}">文件类型</th>
+        <th field="filePath" width="50" editor="{type:'validatebox',options:{required:true}}">文件路径</th>
+    </tr>
+    </thead>
+</table>
+<div id="toolbar" style="padding:5px;height: auto">
+    <div style="float: right;left: 50px">
+        <input class="easyui-combobox" id="searchType" style="width:100px;" value="0" panelHeight="auto" url="/library/type" valueField="value" textField="text" editable="false">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearch()">查询</a>
+    </div>
+    <div>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+           onclick="javascript:$('#dg').edatagrid('addRow')">新建</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+           onclick="javascript:$('#dg').edatagrid('destroyRow')">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+           onclick="javascript:$('#dg').edatagrid('saveRow')">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+           onclick="javascript:$('#dg').edatagrid('cancelRow')">取消</a>
+    </div>
+</div>
+</div>
+</body>
+</html>
+<!--引入edatagrid扩展-->
+<script type="text/javascript" src="jquery-easyui-1.4.2/jquery.edatagrid.js"></script>
+<!-- 引入本地js -->
+<script type="text/javascript" src="js/library_management.js"></script>
