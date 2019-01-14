@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @create 2018/12/25
  */
 @Controller
-public class IndexController {
+public class ViewController {
 
     @RequestMapping("/index")
     public String index(){
@@ -23,5 +23,11 @@ public class IndexController {
     public String user(){
         System.out.println("user..");
         return "user";
+    }
+
+    @RequestMapping("/library")
+    public String library(){
+        System.out.println("library...");
+        return "library_management";
     }
 }
