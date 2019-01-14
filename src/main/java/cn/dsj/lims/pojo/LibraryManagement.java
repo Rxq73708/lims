@@ -1,4 +1,5 @@
 package cn.dsj.lims.pojo;
+
 import java.util.Date;
 
 public class LibraryManagement {
@@ -14,6 +15,7 @@ public class LibraryManagement {
     public LibraryManagement() {
         super();
     }
+
     public LibraryManagement(int id, String fileName, int employeeId, Date uploadingDate, int type, String filePath) {
         this.id = id;
         this.fileName = fileName;
@@ -22,6 +24,7 @@ public class LibraryManagement {
         this.type = type;
         this.filePath = filePath;
     }
+
     public LibraryManagement(String fileName, int employeeId, Date uploadingDate, int type, String filePath) {
         this.fileName = fileName;
         this.employeeId = employeeId;
@@ -29,6 +32,7 @@ public class LibraryManagement {
         this.type = type;
         this.filePath = filePath;
     }
+
     public int getId() {
         return id;
     }

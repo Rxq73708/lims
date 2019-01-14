@@ -24,7 +24,7 @@ public interface LibraryManagementMapper {
     public int update(LibraryManagement libraryManagement);
 
     /**
-     * 删除技术文档
+     * 删除技术文档ipconfig/
      * @return
      */
     public  int delete(int id);

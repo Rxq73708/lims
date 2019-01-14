@@ -3,8 +3,9 @@
 <mapper namespace="cn.dsj.lims.dao.LibraryManagementMapper">
     <!--全局查询-->
     <select id="getLibraryManagementList" resultType="LibraryManagement">
-        select *from library_management
-        where fileName like concat('%',#{fileName},'%')
+        SELECT l.id,l.fileName,e.empName,l.uploadingDate,l.type,l.filePath
+        FROM library_management AS l,employee AS e
+        e.staffId=l.employeeId AND fileName like concat('%',#{fileName},'%')
         <if test="type!=0">
             and type=#{type}
         </if>
@@ -12,13 +13,13 @@
     </select>
     <!--增加-->
     <insert id="add">
-    INSERT INTO library_management (fileName,employeeId,uploadingDate,type,fileContent)
-    values(#{fileName},#{employeeId},#{uploadingDate},#{type},#{fileContent})
+    INSERT INTO library_management (fileName,employeeId,uploadingDate,type,filePath)
+    values(#{fileName},#{employeeId},#{uploadingDate},#{type},#{filePath})
     </insert>
     <!--修改-->
     <update id="update">
     update library_management set fileName=#{fileName},employeeId=#{employeeId},uploadingDate=#{uploadingDate},
-    type =#{type},fileContent=#{fileContent} where id=#{id};
+    type =#{type},filePath=#{filePath} where id=#{id};
 
 
     </update>
@@ -35,5 +36,5 @@
     <!--查询总记录数-->
     <select id="count">
       select count(1) from library_management;
-    </select>
+   </select>
 </mapper>
