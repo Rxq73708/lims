@@ -5,3 +5,6 @@
     top: 20%;
     transform: translate(-50%);
 }
+.login_bg{
+    background: url("../img/login_bg.jpg") 0 0 repeat-x;
+}

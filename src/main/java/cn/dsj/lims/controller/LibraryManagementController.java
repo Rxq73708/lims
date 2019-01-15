@@ -6,19 +6,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/Library")
+@RequestMapping("/library")
 public class LibraryManagementController {
     @Resource
     private LibraryManagementService libraryManagementService;
     @RequestMapping("/list")
-    public Map<String,Object> list(int page,int rows,String searchName,int type){
+    public Map<String,Object> list(int page,int rows,String searchName,String searchType){
         System.out.println("list");
         if(searchName==null)
             searchName="";
-        return libraryManagementService.getLibraryManagementList(searchName,type,page,rows);
+        return libraryManagementService.getLibraryManagementList(searchName,searchType,page,rows);
     }
 
     @RequestMapping("/add")
@@ -45,6 +46,10 @@ public class LibraryManagementController {
         return "false";
     }
 
-
+    @RequestMapping("/type")
+    public List<LibraryManagement> type(){
+        System.out.println("type...");
+        return libraryManagementService.getLibraryMangementByType();
+    }
 
 }

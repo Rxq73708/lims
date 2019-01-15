@@ -1,5 +1,8 @@
 package cn.dsj.lims.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class LibraryManagement {
@@ -7,25 +10,18 @@ public class LibraryManagement {
     private int id;//文库id
     private String fileName;//文件名称
     private int employeeId;//上传人编号
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date uploadingDate;//上传日期
-    private int type;//类别
+    private String type;//类别
     private String filePath;//文件内容
-
+    private String empName;//上传人姓名
 
     public LibraryManagement() {
         super();
     }
 
-    public LibraryManagement(int id, String fileName, int employeeId, Date uploadingDate, int type, String filePath) {
+    public LibraryManagement(int id, String fileName, int employeeId, Date uploadingDate, String type, String filePath) {
         this.id = id;
-        this.fileName = fileName;
-        this.employeeId = employeeId;
-        this.uploadingDate = uploadingDate;
-        this.type = type;
-        this.filePath = filePath;
-    }
-
-    public LibraryManagement(String fileName, int employeeId, Date uploadingDate, int type, String filePath) {
         this.fileName = fileName;
         this.employeeId = employeeId;
         this.uploadingDate = uploadingDate;
@@ -65,19 +61,27 @@ public class LibraryManagement {
         this.uploadingDate = uploadingDate;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public String getFileContent() {
+    public String getFilePath() {
         return filePath;
     }
 
-    public void setFileContent(String filePath) {
+    public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
 }

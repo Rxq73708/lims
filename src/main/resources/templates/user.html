@@ -1,47 +1,103 @@
-<!-- 引入框架 -->
-<div th:replace="frame::html"></div>
-<table id="dg">
+<table id="user_dg">
     <thead>
     <tr>
-        <th field="id" width="50" sortable="true">编号</th>
-        <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">姓名</th>
-        <th field="age" width="50" sortable="true" editor="{type:'validatebox',options:{required:true}}">年龄</th>
+        <th field="id" width="50" sortable="true" align="center" halign="center">编号</th>
+        <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}" align="center" halign="center">姓名</th>
+        <th field="age" width="50" sortable="true" editor="{type:'validatebox',options:{required:true}}" align="center" halign="center">年龄</th>
         <th field="sex" width="50"
-            editor="{type:'combobox',options:{editable:false,panelHeight:'auto',required:true,data:[{'value':'男','text':'男'},{'value':'女','text':'女'}],valueField:'value',textField:'text'}}">
+            editor="{type:'combobox',options:{editable:false,panelHeight:'auto',required:true,data:[{'value':'男','text':'男'},{'value':'女','text':'女'}],valueField:'value',textField:'text'}}"
+            align="center" halign="center">
             性别
         </th>
     </tr>
     </thead>
 </table>
-<div id="toolbar" style="padding:5px;height: auto">
+<div id="user_toolbar" style="padding:5px;height: auto">
     <div style="float: right;left: 50px">
-        <input style="width: 250px" class="easyui-textbox" data-options="prompt:'请输入姓名...',icons:[{
-				iconCls:'icon-search',
-				handler: function(e){
-					var v = $(e.data.target).textbox('getValue');
-					$('#dg').datagrid('load',{
-                    searchName: $('#searchName').val()
-                  });
-				}
-			}]" type="text" id="searchName"/>
+        <input style="width: 250px" class="easyui-textbox" data-options="prompt:'请输入姓名...',
+        icons:[
+        {
+            iconCls:'icon-clear',
+            handler:function(e){
+                $(e.data.target).textbox('setValue','');
+            }
+        },
+        {
+            iconCls:'icon-search',
+            handler: function(e){
+                var v = $(e.data.target).textbox('getValue');
+                $('#user_dg').datagrid('load',{
+                searchName: $('#searchName').val()
+              });
+            }
+		}]" type="text" id="searchName"/>
         <!--<a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearch()">查询</a>-->
     </div>
     <div>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
-           onclick="javascript:$('#dg').edatagrid('addRow')">新建</a>
+           onclick="javascript:$('#user_dg').edatagrid('addRow')">新建</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-           onclick="javascript:$('#dg').edatagrid('destroyRow')">删除</a>
+           onclick="javascript:$('#user_dg').edatagrid('destroyRow')">删除</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
-           onclick="javascript:$('#dg').edatagrid('saveRow')">保存</a>
+           onclick="javascript:$('#user_dg').edatagrid('saveRow')">保存</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
-           onclick="javascript:$('#dg').edatagrid('cancelRow')">取消</a>
+           onclick="javascript:$('#user_dg').edatagrid('cancelRow')">取消</a>
     </div>
+</div>
+</div>
+<script>
+    $(function(){
+        var sex=[{'value':'男','text':'男'},{'value':'女','text':'女'}];
+        //edatagrid加载配置
+        $('#user_dg').edatagrid({
+            url:'user/list',
+            saveUrl:'user/add',
+            updateUrl:'user/modify',
+            destroyUrl:'user/delete',
+            fit:false,
+            //title:'用户信息',
+            toolbar:'#user_toolbar',
+            pagination:true,
+            idField:'id',
+            rownumbers:true,
+            fitColumns:true,
+            singleSelect:true,
+            remoteSort:false,
+            sortName:'id',
+            sortOrder:'asc',
+            //各行换色
+            /*rowStyler: function(index,row){
+                if ((index % 2)==0){
+                    return 'background-color:rgb(233,241,254)';
+                }
+            },*/
+            //删除时消息提示
+            destroyMsg:{
+                norecord:{	// when no record is selected
+                    title:'警告',
+                    msg:'没有选中要删除的用户'
+                },
+                confirm:{	// when select a row
+                    title:'删除',
+                    msg:'你真的要删除该用户吗？'
+                }
+            },
+        });
 
-</div>
-</div>
-</body>
-</html>
-<!--引入edatagrid扩展-->
-<script type="text/javascript" src="jquery-easyui-1.4.2/jquery.edatagrid.js"></script>
-<!-- 引入本地js -->
-<script type="text/javascript" src="js/user.js"></script>
+        //设置分页控件
+        var p=$('#user_dg').edatagrid('getPager');
+        $(p).pagination({
+            pageSize:10,
+            pageList:[5,10,15],
+            beforePageText:'第',
+            afterPageText:'页    共{pages}页',
+            displayMsg:'当前显示 {from} - {to} 条记录  共 {total} 条记录'
+        });
+    });
+    //查询方法
+    // function doSearch(){
+    //     $('#dg').datagrid('load',{
+    //         searchName: $('#searchName').val()
+    //     });
+    // }
+</script>

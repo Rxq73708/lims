@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class LibraryManagementServiceImpl implements LibraryManagementService{
     @Resource
     private LibraryManagementMapper libraryManagementMapper;
     @Override
-    public Map<String,Object> getLibraryManagementList(String fileName, int type, int pageNo, int pageSize) {
+    public Map<String,Object> getLibraryManagementList(String fileName, String type, int pageNo, int pageSize) {
         Map<String,Object> map=new HashMap<>();
         int start=(pageNo-1)*pageSize;
         map.put("total",libraryManagementMapper.count());
@@ -29,7 +30,12 @@ public class LibraryManagementServiceImpl implements LibraryManagementService{
 
     @Override
     public List<LibraryManagement> getLibraryMangementByType() {
-        return libraryManagementMapper.getLibraryMangementByType();
+        List<LibraryManagement>list=new ArrayList<>();
+        LibraryManagement libraryManagement= new LibraryManagement();
+        libraryManagement.setType("所有类型");
+        list.add(libraryManagement);
+        list.addAll(libraryManagementMapper.getLibraryMangementByType());
+        return list;
     }
 
     @Override

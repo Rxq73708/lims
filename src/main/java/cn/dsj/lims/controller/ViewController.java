@@ -30,4 +30,9 @@ public class ViewController {
         System.out.println("library...");
         return "library_management";
     }
+
+    @RequestMapping("/index1")
+    public String index1(){
+        return "index1";
+    }
 }

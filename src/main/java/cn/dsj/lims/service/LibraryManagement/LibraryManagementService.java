@@ -11,7 +11,7 @@ public interface LibraryManagementService {
      *
      * @return
      */
-    public Map<String,Object> getLibraryManagementList(String fileName, int type, int pageNo, int pageSize);
+    public Map<String,Object> getLibraryManagementList(String fileName, String type, int pageNo, int pageSize);
 
     /**
      * 查询文档的所有类型

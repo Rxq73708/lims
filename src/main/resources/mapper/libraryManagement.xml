@@ -5,8 +5,8 @@
     <select id="getLibraryManagementList" resultType="LibraryManagement">
         SELECT l.id,l.fileName,e.empName,l.uploadingDate,l.type,l.filePath
         FROM library_management AS l,employee AS e
-        e.staffId=l.employeeId AND fileName like concat('%',#{fileName},'%')
-        <if test="type!=0">
+        where e.staffId=l.employeeId AND fileName like concat('%',#{fileName},'%')
+        <if test='type!="所有类型" and type!=null'>
             and type=#{type}
         </if>
         limit #{start},#{size};
@@ -34,7 +34,7 @@
     </select>
 
     <!--查询总记录数-->
-    <select id="count">
+    <select id="count" resultType="int">
       select count(1) from library_management;
    </select>
 </mapper>

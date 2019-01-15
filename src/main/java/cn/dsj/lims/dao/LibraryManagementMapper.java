@@ -10,7 +10,7 @@ public interface LibraryManagementMapper {
      * 全局查询
      * @return
      */
-    public List<LibraryManagement> getLibraryManagementList(@Param("fileName")String fileName ,@Param("type") int type, @Param("start") int start, @Param("size") int size);
+    public List<LibraryManagement> getLibraryManagementList(@Param("fileName")String fileName ,@Param("type") String type, @Param("start") int start, @Param("size") int size);
     /**
      * 增加技术文档
      * @return

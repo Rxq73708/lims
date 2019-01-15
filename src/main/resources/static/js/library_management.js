@@ -1,13 +1,12 @@
 $(function(){
     //edatagrid加载配置
-    $('#dg').edatagrid({
+    $('#lib_dg').edatagrid({
         url:'library/list',
         saveUrl:'library/add',
         updateUrl:'library/modify',
         destroyUrl:'library/delete',
         fit:false,
         title:'文库信息',
-        width:700,
         toolbar:'#toolbar',
         pagination:true,
         idField:'id',
@@ -49,6 +48,7 @@ $(function(){
 //查询方法
 function doSearch(){
     $('#dg').datagrid('load',{
-        searchType: $('#searchType').combobox('getValue')
+        searchType: $('#searchType').combobox('getText'),
+        searchName:$('#searchName').val()
     });
 }
