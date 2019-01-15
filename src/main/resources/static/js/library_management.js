@@ -1,13 +1,12 @@
 $(function(){
-    var sex=[{'value':'男','text':'男'},{'value':'女','text':'女'}];
     //edatagrid加载配置
-    $('#dg').edatagrid({
-        url:'user/list',
-        saveUrl:'user/add',
-        updateUrl:'user/modify',
-        destroyUrl:'user/delete',
+    $('#lib_dg').edatagrid({
+        url:'library/list',
+        saveUrl:'library/add',
+        updateUrl:'library/modify',
+        destroyUrl:'library/delete',
         fit:false,
-        title:'用户信息',
+        title:'文库信息',
         toolbar:'#toolbar',
         pagination:true,
         idField:'id',
@@ -27,11 +26,11 @@ $(function(){
         destroyMsg:{
             norecord:{	// when no record is selected
                 title:'警告',
-                msg:'没有选中要删除的用户'
+                msg:'没有选中要删除的文档'
             },
             confirm:{	// when select a row
                 title:'删除',
-                msg:'你真的要删除该用户吗？'
+                msg:'你真的要删除该文档吗？'
             }
         }
     });
@@ -47,9 +46,9 @@ $(function(){
     });
 });
 //查询方法
-// function doSearch(){
-//     $('#dg').datagrid('load',{
-//         searchName: $('#searchName').val()
-//     });
-// }
-
+function doSearch(){
+    $('#dg').datagrid('load',{
+        searchType: $('#searchType').combobox('getText'),
+        searchName:$('#searchName').val()
+    });
+}
