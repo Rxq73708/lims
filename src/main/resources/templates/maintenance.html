@@ -1,0 +1,24 @@
+<!-- 引入框架 -->
+<div th:replace="frame::html"></div>
+
+<table border="1" style="width:900px;">
+    <tr>
+        <th>保养编号</th>
+        <th>设备名称</th>
+        <th>设备型号</th>
+        <th>保养内容</th>
+        <th>保养人</th>
+        <th>保养日期</th>
+    </tr>
+    <tr th:each="equipment:${list}">
+        <td th:text="${equipment.id}"></td>
+        <td th:text="${equipment.equName}"></td>
+        <td th:text="${equipment.type}"></td>
+        <td th:text="${equipment.maintenanceContent}"></td>
+        <td th:text="${equipment.maintenanceName}"></td>
+        <td th:text="${equipment.maintenanceDate}"></td>
+    </tr>
+</table>
+</form>
+</body>
+</html>

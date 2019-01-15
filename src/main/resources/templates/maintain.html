@@ -1,0 +1,26 @@
+<!-- 引入框架 -->
+<div th:replace="frame::html"></div>
+
+<table border="1" style="width:900px;">
+    <tr>
+        <th>维修序号</th>
+        <th>设备名称</th>
+        <th>设备型号</th>
+        <th>维修详情</th>
+        <th>维修结果</th>
+        <th>维修人</th>
+        <th>维修日期</th>
+    </tr>
+    <tr th:each="equipment:${list}">
+        <td th:text="${equipment.id}"></td>
+        <td th:text="${equipment.equName}"></td>
+        <td th:text="${equipment.type}"></td>
+        <td th:text="${equipment.recDesc}"></td>
+        <td th:text="${equipment.maintainResult}"></td>
+        <td th:text="${equipment.maintainName}"></td>
+        <td th:text="${equipment.recDate}"></td>
+    </tr>
+</table>
+</form>
+</body>
+</html>
