@@ -3,32 +3,33 @@
 <mapper namespace="cn.dsj.lims.dao.EquipmentMapper">
     <!--查询所有设备信息-->
     <select id="findEquipmentAll" resultType="Equipment">
-        select id,code,equName,type,equDesc,instruction,buyDate,proId,startDate,useStatus,location
-         from equipment
-        where equName like concat('%',#{equName},'%')
+        select e.id,code,equName,type,equDesc,instruction,buyDate,proName,startDate,useStatus,place
+        from equipment e,provider p,store s
+        where e.proId=p.id and e.storeId=s.id
+        and equName like concat('%',#{equName},'%')
         limit #{start},#{size};
     </select>
     <!--添加设备信息-->
-    <select id="addEquipment" parameterType="Equipment">
+    <insert id="addEquipment" parameterType="Equipment">
         insert into equipment(code,equName,type,equDesc,instruction,
-                               buyDate,proId,startDate,useStatus,location)
+                               buyDate,proId,startDate,useStatus,storeId)
                        values(#{code },#{equName},#{type},#{equDesc},#{instruction},#{buyDate},
-                              #{proId},#{startDate},#{useStatus},#{location})
-    </select>
+                              #{proId},#{startDate},#{useStatus},#{storeId})
+    </insert>
     <!--修改设备信息-->
-    <select id="updateEquipment" parameterType="Equipment">
+    <update id="updateEquipment" parameterType="Equipment">
           UPDATE equipment  SET code=#{code},equName=#{equName},type=#{type},
           equDesc=#{equDesc},instruction=#{instruction},buyDate=#{buyDate},
-          proId=#{proId},startDate=#{startDate},useStatus=#{useStatus},location=#{location}
+          proId=#{proId},startDate=#{startDate},useStatus=#{useStatus},storeId=#{storeId}
           WHERE id=#{id};
-    </select>
+    </update>
     <!--删除设备信息-->
-    <select id="deleteEquipmentById">
+    <delete id="deleteEquipmentById">
         DELETE FROM equipment WHERE id=#{id};
 
-    </select>
+    </delete>
     <!--查询总记录数-->
-    <select id="count">
+    <select id="count" resultType="int">
       select count(1) from equipment;
     </select>
     <!--查询维修信息-->
@@ -39,22 +40,22 @@
          limit #{start},#{size};
    </select>
     <!--添加维修信息-->
-    <select id="addMaintain" parameterType="Maintain">
+    <insert id="addMaintain" parameterType="Maintain">
         INSERT INTO maintain(equipmentId,recDesc,maintainResult,recDate,maintainName)
         values(#{equipmentId},#{recDesc},#{maintainResult},#{recDate},#{maintainName})
-    </select>
+    </insert>
     <!--修改维修信息-->
-    <select id="updateMaintain" parameterType="Maintain">
+    <update id="updateMaintain" parameterType="Maintain">
         UPDATE maintain SET equipmentId=#{equipmentId},recDesc=#{recDesc},
         maintainResult=#{maintainResult},recDate=#{recDate},maintainName=#{maintainName}
      WHERE id=#{id};
-    </select>
+    </update>
     <!--删除维修信息-->
-    <select id="deleteMaintainById">
+    <delete id="deleteMaintainById">
         DELETE FROM maintain WHERE id= #{id};
-    </select>
+    </delete>
     <!--查询总记录数-->
-    <select id="countMaintain">
+    <select id="countMaintain" resultType="int">
       select count(1) from maintain;
     </select>
     <!--查询保养信息-->
@@ -65,22 +66,22 @@
         limit #{start},#{size};
     </select>
     <!--添加保养信息-->
-    <select id="addMaintenance" parameterType="maintenance">
+    <insert id="addMaintenance" parameterType="maintenance">
         INSERT INTO maintenance(equipmentId,maintenanceContent,maintenanceName,maintenanceDate)
         VALUES (#{equipmentId},#{maintenanceContent},#{maintenanceName},#{maintenanceDate})
-    </select>
+    </insert>
     <!--修改保养信息-->
-    <select id="updateMaintenanceById" parameterType="maintenance">
+    <update id="updateMaintenanceById" parameterType="maintenance">
         UPDATE maintenance SET equipmentId= #{equipmentId},maintenanceContent= #{maintenanceContent},
         maintenanceName= #{maintenanceName},maintenanceDate= #{maintenanceDate}
         WHERE id=#{id};
-    </select>
+    </update>
     <!--删除保养信息-->
-    <select id="deleteMaintenanceById">
+    <delete id="deleteMaintenanceById">
         DELETE FROM maintenance WHERE id=#{id};
-    </select>
+    </delete>
     <!--查询总记录数-->
-    <select id="countMaintenance">
+    <select id="countMaintenance" resultType="int">
       select count(1) from maintenance;
     </select>
     <!--查询报废信息-->
@@ -91,22 +92,22 @@
         limit #{start},#{size};
     </select>
     <!--添加报废信息-->
-    <select id="addScrap" parameterType="scrap">
+    <insert id="addScrap" parameterType="scrap">
         INSERT INTO scrap(equipmentId,scrapCause,scrapName,scrapResult,scrapDate)
         VALUES (#{equipmentId},#{scrapCause},#{scrapName},#{scrapResult},#{scrapDate})
-    </select>
+    </insert>
     <!--修改报废信息-->
-    <select id="updateScrap" parameterType="scrap">
+    <update id="updateScrap" parameterType="scrap">
          UPDATE scrap SET equipmentId=#{equipmentId},scrapCause=#{scrapCause},
          scrapName=#{scrapName},scrapResult=#{scrapResult},scrapDate=#{scrapDate}
          WHERE id= #{id};
-    </select>
+    </update>
     <!--删除报废信息-->
-    <select id="deleteScrap">
+    <delete id="deleteScrap">
         DELETE FROM scrap WHERE id=#{id};
-    </select>
+    </delete>
     <!--查询总记录数-->
-    <select id="countScrap">
+    <select id="countScrap" resultType="int">
       select count(1) from scrap;
     </select>
 </mapper>

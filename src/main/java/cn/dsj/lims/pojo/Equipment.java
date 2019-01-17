@@ -1,5 +1,9 @@
 package cn.dsj.lims.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -12,17 +16,24 @@ public class Equipment {
     private String type;//设备型号
     private String equDesc;//设备描述
     private String instruction;//使用说明
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date buyDate;//购买日期
     private String proId;//供应商id
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;//启用日期
-    private int useStatus;//1、正常/2、异常/3、关机/4、维修
-    private String location;//安装位置
+    private String useStatus;//1、正常/2、异常/3、关机/4、维修
+    private int storeId;//储存编号
+
+    private String place;//储存位置
+    private String proName;//供应商
 
     public Equipment() {
         super();
     }
 
-    public Equipment(int id, String code, String equName, String type, String equDesc, String instruction, Date buyDate, String proId, Date startDate, int useStatus, String location) {
+    public Equipment(int id, String code, String equName, String type, String equDesc, String instruction, Date buyDate, String proId, Date startDate, String useStatus, int storeId) {
         this.id = id;
         this.code = code;
         this.equName = equName;
@@ -33,7 +44,7 @@ public class Equipment {
         this.proId = proId;
         this.startDate = startDate;
         this.useStatus = useStatus;
-        this.location = location;
+        this.storeId=storeId;
     }
 
     public int getId() {
@@ -108,19 +119,35 @@ public class Equipment {
         this.startDate = startDate;
     }
 
-    public int getUseStatus() {
+    public String getUseStatus() {
         return useStatus;
     }
 
-    public void setUseStatus(int useStatus) {
+    public void setUseStatus(String useStatus) {
         this.useStatus = useStatus;
     }
 
-    public String getLocation() {
-        return location;
+    public String getProName() {
+        return proName;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setProName(String proName) {
+        this.proName = proName;
+    }
+
+    public int getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 }

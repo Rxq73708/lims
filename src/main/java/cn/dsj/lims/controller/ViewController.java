@@ -31,8 +31,9 @@ public class ViewController {
         return "library_management";
     }
 
-    @RequestMapping("/index1")
-    public String index1(){
-        return "index1";
+    @RequestMapping("/equipment")
+    public String equipment(){
+        System.out.println("equipment...");
+        return "equipment";
     }
 }

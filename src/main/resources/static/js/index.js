@@ -25,6 +25,13 @@ $(function () {
                     href:'/library',
                     closable:true
                 });
+            } else if($(this).text()=="设备详情"){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/equipment',
+                    closable:true
+                });
             } else{
                 $('#tt').tabs('add',{
                     title:$(this).text(),
