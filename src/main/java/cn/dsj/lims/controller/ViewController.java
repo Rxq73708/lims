@@ -31,8 +31,12 @@ public class ViewController {
         return "library_management";
     }
 
-    @RequestMapping("/index1")
+    @RequestMapping("/assess")
     public String index1(){
-        return "index1";
+        return "assess";
+    }
+    @RequestMapping("/system")
+    public String index2(){
+        return "system";
     }
 }
