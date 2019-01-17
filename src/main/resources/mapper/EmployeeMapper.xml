@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dsj.lims.dao.EmployeeMapper">
+    <!--全局查询-->
+ <select id="getEmployeeList" resultType="employee">
+         select e.*,d.deptName
+    from employee as e,dept as d
+    where d.`deptid`=e.deptid and empname like CONCAT('%',#{empName},'%')
+    limit #{start},#{size};</select>
+
+    <!--增加-->
+    <insert id="employeeAdd">
+  insert into employee(staffId,empName,gender,post,workExperience,deptId,age,phone,email,address,school,profession,
+  educationBackground,graduationDate,photo,birthday,marriage,award,punish)
+  values (#{staffId},#{empName},#{gender},#{post},#{workExperience},#{deptId},#{age},#{phone},#{email},
+  #{address},#{school},#{profession},#{educationBackground},#{graduationDate},#{photo},#{birthday},#{marriage},#{award},#{punish})
+    </insert>
+    <!--修改-->
+    <update id="employeeUpdate">
+    update employee set staffId=#{staffId},empName=#{empName},gender=#{gender},post=#{post},workExperience=#{workExperience},deptId=#{deptId},
+    age=#{age},phone=#{phone},email=#{email},address=#{address},school=#{school},profession=#{profession},educationBackground=#{educationBackground},
+    graduationDate=#{graduationDate},photo=#{photo},birthday=#{birthday},marriage=#{marriage},award=#{award},punish=#{punish}
+    where id=#{id};
+    </update>
+    <!--删除-->
+    <delete id="employeeDelete">
+     delete from employee where id=#{id};
+     </delete>
+
+
+    <!--查询总记录数-->
+  <select id="count" resultType="int">
+      select count(1) from employee;
+   </select>
+</mapper>
