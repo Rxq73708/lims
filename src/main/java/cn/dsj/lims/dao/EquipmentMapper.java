@@ -1,14 +1,15 @@
 package cn.dsj.lims.dao;
 
-import java.util.List;
 import cn.dsj.lims.pojo.Equipment;
 import cn.dsj.lims.pojo.Maintain;
 import cn.dsj.lims.pojo.Maintenance;
 import cn.dsj.lims.pojo.Scrap;
-
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 
+@Mapper
 public interface EquipmentMapper {
     /**
      * 设备详情信息
