@@ -32,6 +32,27 @@ $(function () {
                     href:'/equipment',
                     closable:true
                 });
+            } else if($(this).text()=='技术文档'){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/technicalDoc',
+                    closable:true
+                });
+            } else if($(this).text()=='质量文件'){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/qualityDoc',
+                    closable:true
+                });
+            } else if($(this).text()=='检验标准'){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/inspectionStandardsDoc',
+                    closable:true
+                });
             } else{
                 $('#tt').tabs('add',{
                     title:$(this).text(),

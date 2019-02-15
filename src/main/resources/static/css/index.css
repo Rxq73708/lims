@@ -1,33 +1,38 @@
-.tabs-panels{
+.tabs-panels {
     border: none;
 }
-.panel-header.accordion-header{
+
+.panel-header.accordion-header {
     display: flex;
     align-items: center;
     height: 30px;
     padding-left: 20px;
 }
-.panel-title{
+
+.panel-title {
     font-size: 15px;
 }
-.panel-body .accordion-body{
+
+.panel-body .accordion-body {
     padding: 0px;
 }
-.layout-split-west ul,.layout-split-west li{
+
+.layout-split-west ul, .layout-split-west li {
     border-bottom: #99cdff 1px solid;
     height: 40px;
-    padding:0px;
+    padding: 0px;
     font-size: 15px;
-    margin:0;
-    list-style:none;
+    margin: 0;
+    list-style: none;
     text-align: center;
     line-height: 40px;
     cursor: pointer;
 }
 
-a{
-    text-decoration:none;
+a {
+    text-decoration: none;
 }
+
 /*.layout-panel-center .panel-header{*/
-    /*display: none;*/
+/*display: none;*/
 /*}*/

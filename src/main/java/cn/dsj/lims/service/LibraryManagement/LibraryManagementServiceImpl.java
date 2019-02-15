@@ -29,16 +29,6 @@ public class LibraryManagementServiceImpl implements LibraryManagementService{
     }
 
     @Override
-    public List<LibraryManagement> getLibraryMangementByType() {
-        List<LibraryManagement>list=new ArrayList<>();
-        LibraryManagement libraryManagement= new LibraryManagement();
-        libraryManagement.setType("所有类型");
-        list.add(libraryManagement);
-        list.addAll(libraryManagementMapper.getLibraryMangementByType());
-        return list;
-    }
-
-    @Override
     public boolean add(LibraryManagement libraryManagement) {
         if(libraryManagementMapper.add(libraryManagement)>0)
             return true;
@@ -59,5 +49,13 @@ public class LibraryManagementServiceImpl implements LibraryManagementService{
         return false;
     }
 
+    @Override
+    public LibraryManagement selectOne(int id) {
+        return libraryManagementMapper.selectOne(id);
+    }
 
+    @Override
+    public List<LibraryManagement> getLibDirs(String type) {
+        return libraryManagementMapper.getLibDirs(type);
+    }
 }

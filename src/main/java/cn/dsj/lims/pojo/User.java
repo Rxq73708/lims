@@ -13,18 +13,25 @@ public class User {
     private char sex;
     private int age;
 
-    public User(){};
+    public User() {
+    }
+
+    ;
 
     public User(int id, String name, char sex, int age) {
-        this.id=id;
+        this.id = id;
         this.name = name;
         this.sex = sex;
         this.age = age;
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
-    public void setId(int id) { this.id = id; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

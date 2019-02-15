@@ -22,7 +22,7 @@ public class ProviderController {
     private ProviderService providerService;
 
     @RequestMapping("/list")
-    public List<Provider> list(){
+    public List<Provider> list() {
         return providerService.getProviderList();
     }
 }

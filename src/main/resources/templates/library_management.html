@@ -2,11 +2,20 @@
     <thead>
     <tr>
         <th field="id" width="20" align="center" halign="center" sortable="true">编号</th>
-        <th field="fileName" width="100" align="center" halign="center" editor="{type:'filebox',options:{required:true}}">文件名</th>
+        <th field="fileName" width="100" align="center" halign="center"
+            editor="{type:'filebox',options:{required:true}}">文件名
+        </th>
         <th field="empName" width="50" align="center" halign="center">上传人</th>
-        <th field="uploadingDate" width="50" align="center" halign="center" sortable="true">上传时间</th>
-        <th field="type" width="50" align="center" halign="center" editor="{type:'validatebox',options:{required:true}}">文件类型</th>
-        <th field="filePath" width="50" align="center" halign="center" editor="{type:'validatebox',options:{required:true}}">文件路径</th>
+        <th field="uploadingDate" width="50" align="center" halign="center" sortable="true"
+            editor="{type:'datebox',options:{editable:false,required:true,validType:'compareToday'}}">上传时间
+        </th>
+        <th field="type" width="50" align="center" halign="center" editor="{type:'combobox',options:{editable:false,panelHeight:'auto',required:true,
+        data:[{text:'技术文档',value:''},
+              {text:'质量文件',value:''},
+              {text:'检验标准',value:''}],
+        textField:'text',valueField:'value'
+        }}">文件类型
+        </th>
     </tr>
     </thead>
 </table>
@@ -22,7 +31,14 @@
                 }
             }
         ]">
-        文档类型：<input class="easyui-combobox" id="searchType" style="width:100px;" panelHeight="auto" url="/library/type" valueField="type" value="所有类型"  textField="type" editable="false">
+        文档类型：
+        <select id="searchType" class="easyui-combobox" name="state" editable="false" panelHeight="auto"
+                style="width:150px;">
+            <option>所有类型</option>
+            <option>技术文档</option>
+            <option>质量文件</option>
+            <option>标准检验</option>
+        </select>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearch()">查询</a>
     </div>
     <div>
@@ -36,30 +52,39 @@
            onclick="javascript:$('#lib_dg').edatagrid('cancelRow')">取消</a>
     </div>
 </div>
-<div id="dd"></div>
-<div id="bb">
-    <a href="" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">保存</a>
-    <a href="" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+<div id="dd" style="padding:30px 70px 30px 70px;display: none">
+    <div style="margin-bottom:20px">
+        <div>文档类型:</div>
+        <select id="type" class="easyui-combobox" name="state" editable="false" panelHeight="auto" style="width:150px;">
+            <option>技术文档</option>
+            <option>质量文件</option>
+            <option>标准检验</option>
+        </select>
+    </div>
+    <div style="margin-bottom:20px">
+        <div>文件:</div>
+        <input id="file" name="file" type="text" style="width:250px">
+    </div>
 </div>
 <script>
-    $(function(){
+    $(function () {
         //edatagrid加载配置
         $('#lib_dg').edatagrid({
-            url:'library/list',
-            saveUrl:'library/add',
-            updateUrl:'library/modify',
-            destroyUrl:'library/delete',
-            fit:false,
+            url: 'library/list',
+            //saveUrl:'library/add',
+            updateUrl: 'library/modify',
+            destroyUrl: 'library/delete',
+            fit: false,
             //title:'文库信息',
-            toolbar:'#lib_toolbar',
-            pagination:true,
-            idField:'id',
-            rownumbers:true,
-            fitColumns:true,
-            singleSelect:true,
-            remoteSort:false,
-            sortName:'id',
-            sortOrder:'asc',
+            toolbar: '#lib_toolbar',
+            pagination: true,
+            idField: 'id',
+            rownumbers: true,
+            fitColumns: true,
+            singleSelect: true,
+            remoteSort: false,
+            sortName: 'id',
+            sortOrder: 'asc',
             //各行换色
             /*rowStyler: function(index,row){
                 if ((index % 2)==0){
@@ -67,48 +92,99 @@
                 }
             },*/
             //删除时消息提示
-            destroyMsg:{
-                norecord:{	// when no record is selected
-                    title:'警告',
-                    msg:'没有选中要删除的文档'
+            destroyMsg: {
+                norecord: {	// when no record is selected
+                    title: '警告',
+                    msg: '没有选中要删除的文档'
                 },
-                confirm:{	// when select a row
-                    title:'删除',
-                    msg:'你真的要删除该文档吗？'
+                confirm: {	// when select a row
+                    title: '删除',
+                    msg: '你真的要删除该文档吗？'
                 }
             }
         });
 
         //设置分页控件
-        var p=$('#lib_dg').edatagrid('getPager');
+        var p = $('#lib_dg').edatagrid('getPager');
         $(p).pagination({
-            pageSize:10,
-            pageList:[5,10,15],
-            beforePageText:'第',
-            afterPageText:'页    共{pages}页',
-            displayMsg:'当前显示 {from} - {to} 条记录  共 {total} 条记录'
+            pageSize: 10,
+            pageList: [5, 10, 15],
+            beforePageText: '第',
+            afterPageText: '页    共{pages}页',
+            displayMsg: '当前显示 {from} - {to} 条记录  共 {total} 条记录'
+        });
+
+        //扩展edategrid的datebox验证
+        $.extend($.fn.validatebox.defaults.rules, {
+            compareToday: {
+                validator: function (value) {
+                    var date = new Date();
+                    return Date.parse(value) <= Date.parse(date);
+                },
+                message: '所选日期应不大于当前时间!'
+            }
         });
 
     });
+
     //查询方法
-    function doSearch(){
-        $('#lib_dg').datagrid('load',{
+    function doSearch() {
+        $('#lib_dg').datagrid('load', {
             searchType: $('#searchType').combobox('getText'),
-            searchName:$('#searchName').val()
+            searchName: $('#searchName').val()
         });
     }
 
     //文件上传
-    function upload(){
+    function upload() {
+        $('#file').filebox({
+            buttonText: '选择文件',
+            buttonAlign: 'right',
+            prompt: '请选择文件'
+        })
         $('#dd').dialog({
             title: '文档上传',
+            top: 150,
             width: 400,
-            height: 300,
             closed: false,
             cache: false,
             //href: 'get_content.php',
             modal: true,
-            buttons:'#bb'
+            buttons: [
+                {
+                    text: '上传',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        $('#dd').dialog('close');
+                        var fileId = $("input[name='file']").attr('id');
+                        $.ajaxFileUpload({
+                            url: '/library/add',
+                            secureuri: false, //
+                            fileElementId: fileId,
+                            data: {type: $('#type').combobox('getValue')},
+                            dataType: 'json',
+                            type: 'post',
+                            success: function (data) {
+                                $('#file').filebox('clear');
+                                if (data) {
+                                    $('#lib_dg').edatagrid('load');
+                                } else {
+                                    $.messager.alert('提示', '上传失败');
+                                }
+                            }
+                        });
+                    }
+                }, {
+                    text: '取消',
+                    iconCls: 'icon-cancel',
+                    handler: function () {
+                        $('#dd').dialog('close');
+                    }
+                }
+            ],
+            onOpen: function () {
+                $(this).css('display', '');
+            }
         });
     }
 </script>

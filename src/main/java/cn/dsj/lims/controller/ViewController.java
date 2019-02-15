@@ -14,26 +14,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ViewController {
 
     @RequestMapping("/index")
-    public String index(){
+    public String index() {
         System.out.println("index..");
         return "index";
     }
 
     @RequestMapping("/user")
-    public String user(){
+    public String user() {
         System.out.println("user..");
         return "user";
     }
 
     @RequestMapping("/library")
-    public String library(){
+    public String library() {
         System.out.println("library...");
         return "library_management";
     }
 
     @RequestMapping("/equipment")
-    public String equipment(){
+    public String equipment() {
         System.out.println("equipment...");
         return "equipment";
     }
+
+    @RequestMapping("/technicalDoc")
+    public String technicalDoc() {
+        System.out.println("technicalDoc...");
+        return "technicalDoc";
+    }
+
+    @RequestMapping("/qualityDoc")
+    public String qualityDoc() {
+        System.out.println("qualityDoc...");
+        return "qualityDoc";
+    }
+
+    @RequestMapping("/inspectionStandardsDoc")
+    public String inspectionStandardsDoc() {
+        System.out.println("inspectionStandardsDoc");
+        return "inspectionStandardsDoc";
+    }
+
 }

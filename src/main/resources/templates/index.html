@@ -5,8 +5,13 @@
     <title>大数据LIMS管理系统</title>
     <!-- 引入JQuery -->
     <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.min.js"></script>
+    <!--预览swf文件的插件-->
+    <script type="text/javascript" src="js/flexpaper_flash.js"></script>
+    <script type="text/javascript" src="js/flexpaper_flash_debug.js"></script>
     <!-- 引入EasyUI -->
     <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+    <!--AjaxFileUpload.js-->
+    <script type="text/javascript" src="js/ajaxfileupload.js"></script>
     <!-- 引入EasyUI的中文国际化js，让EasyUI支持中文 -->
     <script type="text/javascript" src="jquery-easyui-1.4.2/locale/easyui-lang-zh_CN.js"></script>
     <!--引入edatagrid扩展-->
@@ -19,11 +24,16 @@
     <link rel="stylesheet" href="jquery-easyui-1.4.2/themes/icon.css" type="text/css"/>
     <!-- 本地样式文件 -->
     <link rel="stylesheet" href="css/index.css" type="text/css">
+    <!--<style type="text/css" media="screen">-->
+        <!--html, body  { height:100%; }-->
+        <!--body { margin:0; padding:0; overflow:auto; }-->
+        <!--#flashContent { display:none; }-->
+    <!--</style>-->
 </head>
 <body class="easyui-layout">
 <!-- 布局中如果不需要north这个面板，那么可以删掉这个div -->
 <div data-options="region:'north',title:'大数据16LIMS实验室管理系统',split:true" style="height:100px;">
-    <span>欢迎你，<shiro:principal/></span>
+    <span>欢迎你，<shiro:principal property="username"/></span>
     <a href="/logout" class="easyui-linkbutton">安全退出</a>
 </div>
 <!-- 布局中如果不需要south这个面板，那么可以删掉这个div -->
@@ -81,7 +91,7 @@
                 <li><a href="">设备详情</a></li>
                 <li><a href="">设备运行状况</a></li>
                 <li><a href="">保养记录</a></li>
-                <li><a href="">检修记录</a></li>
+                <li><a href="">维修记录</a></li>
             </ul>
         </div>
         <shiro:hasAllRoles name="ROLE_ADMIN">

@@ -16,7 +16,8 @@ public class Provider {
     private String proAddress;
     private String proEmail;
 
-    public Provider(){}
+    public Provider() {
+    }
 
     public Provider(String id, String proName, String proDesc, String proContact, String proPhone, String proAddress, String proEmail) {
         this.id = id;

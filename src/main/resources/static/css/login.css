@@ -1,10 +1,11 @@
-.panel{
-    margin:0 auto;
+.panel {
+    margin: 0 auto;
     position: absolute;
     left: 50%;
     top: 20%;
     transform: translate(-50%);
 }
-.login_bg{
+
+.login_bg {
     background: url("../img/login_bg.jpg") 0 0 repeat-x;
 }

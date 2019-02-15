@@ -15,13 +15,14 @@ public class SysUser {
     private String password;
     private Set<SysRole> roleSet;
 
-    private SysUser(){}
+    private SysUser() {
+    }
 
-    public SysUser(int id, String username, String password,Set<SysRole> roleSet) {
+    public SysUser(int id, String username, String password, Set<SysRole> roleSet) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.roleSet=roleSet;
+        this.roleSet = roleSet;
     }
 
     public int getId() {

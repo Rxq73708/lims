@@ -25,32 +25,32 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Map<String,Object> select(String name, int pageNo, int pageSize) {
-        Map<String,Object> map=new HashMap<>();
-        int start=(pageNo-1)*pageSize;
-        int total=userMapper.count();
-        map.put("rows",userMapper.select(name,start,pageSize));
-        map.put("total",total);
+    public Map<String, Object> select(String name, int pageNo, int pageSize) {
+        Map<String, Object> map = new HashMap<>();
+        int start = (pageNo - 1) * pageSize;
+        int total = userMapper.count();
+        map.put("rows", userMapper.select(name, start, pageSize));
+        map.put("total", total);
         return map;
     }
 
     @Override
     public boolean add(User user) {
-        if(userMapper.insert(user)>0)
+        if (userMapper.insert(user) > 0)
             return true;
         return false;
     }
 
     @Override
     public boolean delete(int id) {
-        if(userMapper.delete(id)>0)
+        if (userMapper.delete(id) > 0)
             return true;
         return false;
     }
 
     @Override
     public boolean modify(User user) {
-        if(userMapper.update(user)>0)
+        if (userMapper.update(user) > 0)
             return true;
         return false;
     }

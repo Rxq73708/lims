@@ -11,14 +11,7 @@ public interface LibraryManagementService {
      *
      * @return
      */
-    public Map<String,Object> getLibraryManagementList(String fileName, String type, int pageNo, int pageSize);
-
-    /**
-     * 查询文档的所有类型
-     *
-     * @return
-     */
-    public List<LibraryManagement> getLibraryMangementByType();
+    public Map<String, Object> getLibraryManagementList(String fileName, String type, int pageNo, int pageSize);
 
     /**
      * 增加技术文档
@@ -40,4 +33,21 @@ public interface LibraryManagementService {
      * @return
      */
     public boolean delete(int id);
+
+    /**
+     * 根据id查询文档
+     *
+     * @param id
+     * @return
+     */
+    public LibraryManagement selectOne(int id);
+
+    /**
+     * 根据文档类型获取所有响应的文档
+     *
+     * @param type
+     * @return
+     */
+    public List<LibraryManagement> getLibDirs(String type);
+
 }

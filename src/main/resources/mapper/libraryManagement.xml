@@ -20,21 +20,25 @@
     <update id="update">
     update library_management set fileName=#{fileName},employeeId=#{employeeId},uploadingDate=#{uploadingDate},
     type =#{type},filePath=#{filePath} where id=#{id};
-
-
     </update>
     <!--删除-->
     <delete id="delete">
     delete from library_management where id=#{id};
     </delete>
 
-    <!--查询文档的所有类型-->
-    <select id="getLibraryMangementByType" resultType="LibraryManagement">
-        select type from library_management group by type ;
-    </select>
-
     <!--查询总记录数-->
     <select id="count" resultType="int">
       select count(1) from library_management;
    </select>
+
+    <!--根据id查询文档-->
+    <select id="selectOne" resultType="LibraryManagement">
+        select *from library_management where id=#{id};
+    </select>
+
+    <!--根据文档类型获取所有响应的文档-->
+    <select id="getLibDirs" resultType="LibraryManagement">
+        select id,fileName,filePath from library_management
+        where type=#{type}
+    </select>
 </mapper>

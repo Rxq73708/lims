@@ -11,6 +11,7 @@
     <groupId>cn.dsj</groupId>
     <artifactId>lims</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>lims</name>
     <description>Demo project for Spring Boot</description>
 
@@ -22,6 +23,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <!--移除嵌入式tomcat插件-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--servlet-api依赖-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
         <dependency>
@@ -76,6 +90,13 @@
             <groupId>com.github.theborakompanioni</groupId>
             <artifactId>thymeleaf-extras-shiro</artifactId>
             <version>2.0.0</version>
+        </dependency>
+
+        <!--OpenDocument文件转换器-->
+        <dependency>
+            <groupId>com.artofsolving</groupId>
+            <artifactId>jodconverter</artifactId>
+            <version>2.2.2</version>
         </dependency>
     </dependencies>
 
