@@ -55,4 +55,16 @@ public class ViewController {
         return "inspectionStandardsDoc";
     }
 
+    @RequestMapping("/sampleTestReq")
+    public String sampleTestReq(){
+        System.out.println("sampleTestReq...");
+        return "sampleTestReq";
+    }
+
+    @RequestMapping("/processedReq")
+    public String processedReq(){
+        System.out.println("processedReq...");
+        return "processedReq";
+    }
+
 }

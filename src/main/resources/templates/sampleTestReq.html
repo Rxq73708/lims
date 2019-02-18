@@ -1,0 +1,91 @@
+<!--数据表格-->
+<table id="sampleTestReq_dg"></table>
+<!--工具栏-->
+<div id="sampleTestReq_toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" plain="true" onclick="processingReq()">处理申请</a>
+</div>
+
+<script>
+    var value=1;
+    $('#sampleTestReq_dg').datagrid({
+        url:'/sampleTestReq/state/'+value,//数据源
+        columns:[
+            [
+                {field:'ck',checkbox:true},
+                {field:'id',title:'编号',width:100},
+                {field:'sampleReqId',title:'检测申请编号',width:100},
+                {field:'itemId',title:'检测项目编号',width:100},
+                {field:'sampleId',title:'样品编号',width:100},
+                {field:'count',title:'样品数量',width:100},
+                {field:'userReq',title:'申请人',width:100},
+                {field:'reqDate',title:'申请时间',width:100}
+            ]
+        ],
+        fit:false,
+        pagination:true,
+        idField:'id',
+        rownumbers:true,
+        fitColumns:true,
+        singleSelect:false, //false:多选，true:单选
+        remoteSort:false,
+        sortName:'id',      //排序字段
+        sortOrder:'asc',    //升序
+        toolbar:'#sampleTestReq_toolbar',//设置工具栏
+        // 如果没有数据，就增加提示
+        onLoadSuccess:function(data){
+            if (data.total == 0) {
+                //添加一个新数据行，第一列的值为你需要的提示信息，然后将其他列合并到第一列来，注意修改colspan参数为你columns配置的总列数
+                $(this).datagrid('appendRow', { id: '<div style="text-align:center;color:red">没有相关记录！</div>' })
+                    .datagrid('mergeCells', { index: 0, field: 'id', colspan: 7 })
+                    .datagrid('hideColumn','ck');
+                //隐藏分页导航条，这个需要熟悉datagrid的html结构，直接用jquery操作DOM对象，easyui datagrid没有提供相关方法隐藏导航条
+                $(this).closest('div.datagrid-wrap').find('div.datagrid-pager').hide();
+            }
+            //如果通过调用reload方法重新加载数据有数据时显示出分页导航容器
+            else $(this).closest('div.datagrid-wrap').find('div.datagrid-pager').show();
+        }
+    });
+
+    //设置分页控件
+    var p=$('#sampleTestReq_dg').datagrid('getPager');
+    $(p).pagination({
+        pageSize:10,
+        pageList:[5,10,15],
+        beforePageText:'第',
+        afterPageText:'页    共{pages}页',
+        displayMsg:'当前显示 {from} - {to} 条记录  共 {total} 条记录'
+    });
+
+    //处理申请的方法
+    function processingReq() {
+        var checkedRows= $('#sampleTestReq_dg').datagrid('getChecked');
+        var ids=new Array();
+        for (var i=0;i<checkedRows.length;i++){
+            ids[i]=checkedRows[i].id;
+        }
+        if(ids.length==0){
+            $.messager.show({
+                title:'消息提示',
+                msg:'没有要处理的申请',
+                showType:'show'
+            });
+        }else{
+            $.post('/sampleTestReq/processing',{ids:ids},function (result) {
+                if(result==true){
+                    $('#sampleTestReq_dg').datagrid('reload');
+                    $.messager.show({
+                        title:'处理消息',
+                        msg:'申请处理成功！',
+                        showType:'show'
+                    });
+                }else if(result==false){
+                    $.messager.show({
+                        title:'处理消息',
+                        msg:'申请处理失败！',
+                        showType:'show'
+                    });
+                }
+            });
+        }
+    }
+</script>

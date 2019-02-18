@@ -18,7 +18,21 @@ $(function () {
                     href:'/user',
                     closable:true
                 });
-            }else if($(this).text()=="文库管理"){
+            } else if($(this).text()=="待处理检测申请"){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/sampleTestReq',
+                    closable:true
+                });
+            }  else if($(this).text()=="已处理检测申请"){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/processedReq',
+                    closable:true
+                });
+            } else if($(this).text()=="文库管理"){
                 $('#tt').tabs('add',{
                     title:$(this).text(),
                     cache:true,
