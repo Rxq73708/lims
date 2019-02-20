@@ -1,9 +1,9 @@
 <!--数据表格-->
 <table id="processedReq_dg"></table>
 <!--工具栏-->
-<!--<div id="processedReq_toolbar">
+<div id="processedReq_toolbar">
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="">查询</a>
-</div>-->
+</div>
 
 <script>
     var value=2
@@ -11,10 +11,11 @@
         url:'/sampleTestReq/state/'+value,//数据源
         columns:[
             [
+                //{field:'ck',checkbox:true},
                 {field:'id',title:'编号',width:100},
                 {field:'sampleReqId',title:'检测申请编号',width:100},
-                {field:'itemId',title:'检测项目编号',width:100},
-                {field:'sampleId',title:'样品名称',width:100},
+                {field:'itemId',title:'检测项目编号',width:100,hidden:'true'},
+                {field:'sampleId',title:'样品编号',width:100},
                 {field:'count',title:'样品数量',width:100},
                 {field:'userReq',title:'申请人',width:100},
                 {field:'reqDate',title:'申请时间',width:100}
@@ -35,18 +36,79 @@
             if (data.total == 0) {
                 //添加一个新数据行，第一列的值为你需要的提示信息，然后将其他列合并到第一列来，注意修改colspan参数为你columns配置的总列数
                 $(this).datagrid('appendRow', { id: '<div style="text-align:center;color:red">没有相关记录！</div>' })
-                    .datagrid('mergeCells', { index: 0, field: 'id', colspan: 7 })
-                    .datagrid('hideColumn','ck');
+                    .datagrid('hideColumn','ck')
+                    //.datagrid('hideColumn','_expander')
+                    .datagrid('mergeCells', { index: 0, field: 'id', colspan: 7 });
                 //隐藏分页导航条，这个需要熟悉datagrid的html结构，直接用jquery操作DOM对象，easyui datagrid没有提供相关方法隐藏导航条
                 $(this).closest('div.datagrid-wrap').find('div.datagrid-pager').hide();
             }
             //如果通过调用reload方法重新加载数据有数据时显示出分页导航容器
             else $(this).closest('div.datagrid-wrap').find('div.datagrid-pager').show();
+        },
+        view:detailview,
+        detailFormatter:function(index,row){
+            return "<div><table id='p_ddv-"+index+"'></table></div>";
+        },
+        onExpandRow:function(index,row){
+            if(row.sampleId==undefined){
+                return false;
+            }
+            var itemIds= row.itemId.split(',');
+            $("#p_ddv-"+index).datagrid({
+                url:'detectionItem/sampleId/'+row.sampleId,
+                fitColumns:true,
+                singleSelect:false,
+                checkOnSelect:false,
+                //width:150,
+                height:'auto',
+                idField:'id',
+                columns:[
+                    [
+                        {field:'ck1',checkbox:true},
+                        {field:'id',hidden:'true'},
+                        {field:"itemName",title:"检测项目",width:100}
+                    ]
+                ],
+                onResize:function(){
+                    $('#sampleTestReq_dg').datagrid('fixDetailRowHeight',index);
+                },
+                onLoadSuccess:function(data){
+                    for(var i=0;i<itemIds.length;i++){
+                        for(var j=0;j<data.rows.length;j++){
+                            var id=data.rows[j].id;
+                            if(itemIds[i]==id){
+                                $(this).datagrid('checkRow',$(this).datagrid('getRowIndex',id));
+                            }
+                        }
+                    }
+                    $("td[field='ck1'] input[type='checkbox']").each(function () {
+                        $(this).click(function () {
+                            return false;
+                        });
+                    });
+                    $("td[field='ck1'] .datagrid-header-check input[type='checkbox']").each(function () {
+                        $(this).css('display','none');
+                    });
+
+                    setTimeout(function(){
+                        $('#processedReq_dg').datagrid('fixDetailRowHeight',index);
+                        $('#processedReq_dg').datagrid('fixRowHeight',index);
+                    },0);
+                },
+                onClickRow: function (rowIndex, rowData) {
+                    if(itemIds.indexOf(rowData.id.toString())==-1){
+                        $(this).datagrid('unselectRow', rowIndex);
+                    }else{
+                        $(this).datagrid('selectRow', rowIndex);
+                    }
+                },
+            });
+            $('#processedReq_dg').datagrid('fixDetailRowHeight',index);
         }
     });
 
     //设置分页控件
-    var p=$('#processedReq_toolbar').datagrid('getPager');
+    var p=$('#processedReq_dg').datagrid('getPager');
     $(p).pagination({
         pageSize:10,
         pageList:[5,10,15],
@@ -55,4 +117,7 @@
         displayMsg:'当前显示 {from} - {to} 条记录  共 {total} 条记录'
     });
 
+    window.top["Refresh_CloudHomePage_Content"] = function () {
+        $('#processedReq_dg').datagrid('reload');
+    }
 </script>

@@ -13,7 +13,6 @@ import javax.annotation.Resource;
 import java.util.Map;
 
 @RestController
-
 public class EquipmentController {
     @Resource
     private EquipmentService equipmentService;
