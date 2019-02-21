@@ -119,3 +119,9 @@ function removePanel() {
     if($('.tabs-selected').text()!='主页')
         var tab = $('#tt').tabs('close',$('.tabs-selected').text());
 }
+
+function RefreshCloudHomePageTab(title) {
+    if ($("#tt").tabs('exists', title)) {
+        window.top.Refresh_CloudHomePage_Content.call();
+    }
+}

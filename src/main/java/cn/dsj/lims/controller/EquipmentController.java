@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-
 public class EquipmentController {
     @Resource
     private EquipmentService equipmentService;

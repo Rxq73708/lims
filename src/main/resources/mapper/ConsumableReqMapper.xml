@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dsj.lims.dao.ConsumableReqMapper">
+
+    <!--查询所有数据-->
+    <select id="getList" resultType="ConsumableReq">
+        select * from consumable_req
+    </select>
+
+    <!--添加数据-->
+    <insert id="addList" parameterType="ConsumableReq">
+        insert into consumable_req(empId,materialId,count,reqDate,reqDesc)
+        value(#{empId},#{materialId},#{count},#{reqDate},#{reqDesc})
+    </insert>
+
+    <!--根据id修改数据-->
+    <update id="updateList" parameterType="ConsumableReq">
+        update consumable_req set remark=#{remark}
+        where id=#{id}
+    </update>
+
+    <!--根据id删除数据-->
+    <delete id="deleteList" parameterType="ConsumableReq">
+        delete from consumable_req where id=#{id}
+    </delete>
+</mapper>

@@ -17,21 +17,21 @@ public interface AssessMapper {
      * @param assess
      * @return
      */
-    public int AssessAdd(Assess assess);
+    public int assessAdd(Assess assess);
 
     /**
      * 修改
      * @param assess
      * @return
      */
-    public int AssessUpdate(Assess assess);
+    public int assessUpdate(Assess assess);
 
     /**
      * 删除
      * @param id
      * @return
      */
-    public int AssessDelete(int id);
+    public int assessDelete(int id);
     /**
      * 查询总记录数
      * @return
