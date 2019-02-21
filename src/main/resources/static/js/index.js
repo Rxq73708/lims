@@ -18,6 +18,13 @@ $(function () {
                     href:'/user',
                     closable:true
                 });
+            } else if($(this).text()=="部门组织结构"){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/structure',
+                    closable:true
+                });
             } else if($(this).text()=="部门管理制度"){
                 $('#tt').tabs('add',{
                     title:$(this).text(),
@@ -110,13 +117,6 @@ $(function () {
                     closable:true
                 });
             }
-        }else if($(this).text()=="部门组织结构"){
-            $('#tt').tabs('add',{
-                title:$(this).text(),
-                cache:true,
-                href:'/structure',
-                closable:true
-            });
         }else{
             $('#tt').tabs('select',$(this).text());
         }
