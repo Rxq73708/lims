@@ -5,9 +5,15 @@ import cn.dsj.lims.pojo.Maintain;
 import cn.dsj.lims.pojo.Maintenance;
 import cn.dsj.lims.pojo.Scrap;
 
+import java.util.List;
 import java.util.Map;
 
 public interface EquipmentService {
+    /**
+     * 设备详情
+     * @return
+     */
+    public List<Equipment> listEquipment();
     /**
      * 设备详情
      * @return
