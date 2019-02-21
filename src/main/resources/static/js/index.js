@@ -60,6 +60,13 @@ $(function () {
                     href:'/equipment',
                     closable:true
                 });
+            }else if($(this).text()=="部门考核"){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/assess',
+                    closable:true
+                });
             } else if($(this).text()=='技术文档'){
                 $('#tt').tabs('add',{
                     title:$(this).text(),
