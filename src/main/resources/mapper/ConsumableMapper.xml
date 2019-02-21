@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dsj.lims.dao.ConsumableMapper">
+
+    <!-- 查询所有信息 -->
+    <select id="getList" resultType="Consumable">
+        select * from consumable
+    </select>
+
+    <!-- 添加信息 -->
+    <insert id="addList" parameterType="Consumable">
+        insert into consumable(materialName,production_date,specification ,materialDesc,
+        materialType,get_count,unit,shelf_location,shelf_life,unit_price,proId,remark)
+        value(#{materialName},#{productionDate},#{specification},#{materialDesc},#{materialType},
+        #{getCount},#{unit},#{shelfLocation},#{shelfLife},#{unitPrice},#{proId},#{remark})
+    </insert>
+
+    <!-- 修改信息 -->
+    <update id="updateList" parameterType="Consumable">
+        update consumable set materialName=#{materialName}
+        where id=#{id}
+    </update>
+
+    <!-- 删除信息 -->
+    <delete id="deleteList" parameterType="Integer">
+        delete from consumable where id=#{id}
+    </delete>
+</mapper>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -15,6 +16,11 @@ import java.util.Map;
 public class EquipmentServiceImpl implements EquipmentService {
     @Resource
     private EquipmentMapper equipmentMapper;
+
+    @Override
+    public List<Equipment> listEquipment() {
+        return equipmentMapper.listEquipment();
+    }
     @Override
     public Map<String,Object> findEquipmentAll(String equName , int pageNo, int pageSize) {
         Map<String,Object> map=new HashMap<>();

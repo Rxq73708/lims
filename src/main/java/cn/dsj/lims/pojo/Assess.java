@@ -1,12 +1,17 @@
 package cn.dsj.lims.pojo;
 
-import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 public class Assess {
     private int id;//考核表主键id
     private Integer assessId;//姓名对应员工详情表staffId
     private String empName;//受考核员工姓名
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date assessDate;//考核日期
     private String signature;//领导签字
     private String details;//Excel表的考核详情

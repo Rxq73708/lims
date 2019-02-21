@@ -1,9 +1,8 @@
-
 <!--工具栏-->
 <!--<div id="processedReq_toolbar">
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="">查询</a>
 </div>-->
-<div id="maintain_toolbar" style="padding:5px;height: auto">
+<div id="scrap_toolbar" style="padding:5px;height: auto">
     <div style="float: right;left: 50px">
         <input style="width: 250px" class="easyui-textbox" data-options="prompt:'请输入仪器名称...',
         icons:[
@@ -17,7 +16,7 @@
             iconCls:'icon-search',
             handler: function(e){
                 var v = $(e.data.target).textbox('getValue');
-                $('#maintain_dg').datagrid('load',{
+                $('#scrap_dg').datagrid('load',{
                 searchName: $('#searchName').val()
               });
             }
@@ -26,27 +25,26 @@
     </div>
     <div>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
-           onclick="javascript:$('#maintain_dg').edatagrid('addRow')">新建</a>
+           onclick="javascript:$('#scrap_dg').edatagrid('addRow')">新建</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-           onclick="javascript:$('#maintain_dg').edatagrid('destroyRow')">删除</a>
+           onclick="javascript:$('#scrap_dg').edatagrid('destroyRow')">删除</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
-           onclick="javascript:$('#maintain_dg').edatagrid('saveRow')">保存</a>
+           onclick="javascript:$('#scrap_dg').edatagrid('saveRow')">保存</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
-           onclick="javascript:$('#maintain_dg').edatagrid('cancelRow')">取消</a>
+           onclick="javascript:$('#scrap_dg').edatagrid('cancelRow')">取消</a>
     </div>
 </div>
 </div>
-<table id="maintain_dg"></table>
+<table id="scrap_dg"></table>
 <script>
-    $('#maintain_dg').edatagrid({
-        url:'/findMaintain',//数据源
-        saveUrl: '/addMaintain',
-        updateUrl: '/updateMaintain',
-        destroyUrl: '/deleteMaintain',
+    $('#scrap_dg').edatagrid({
+        url:'/findScrap',//数据源
+        saveUrl: '/addScrap',
+        updateUrl: '/updateScrap',
+        destroyUrl: '/deleteScrap',
         columns:[
             [
                 {field:'id',title:'编号',width:100},
-
                 {field:'equName',title:'设备名称',width:100,
                     editor:{
                         type:'combobox',
@@ -58,9 +56,9 @@
                             valueField:'id',
                             textField:'equName',
                             onLoadSuccess:function(){
-                                var row =$('#maintain_dg').edatagrid('getSelected');
-                                var rowIndex=$('#maintain_dg').edatagrid('getRowIndex',row);
-                                var ed= $('#maintain_dg').edatagrid('getEditor',{index:rowIndex,field:'equName'});
+                                var row =$('#scrap_dg').edatagrid('getSelected');
+                                var rowIndex=$('#scrap_dg').edatagrid('getRowIndex',row);
+                                var ed= $('#scrap_dg').edatagrid('getEditor',{index:rowIndex,field:'equName'});
                                 var equName=$(ed.target).combobox('getValue');
                                 var comboxData=$(this).combobox('getData');
                                 console.info(comboxData);
@@ -85,9 +83,9 @@
                             valueField:'id',
                             textField:'type',
                             onLoadSuccess:function(){
-                                var row =$('#maintain_dg').edatagrid('getSelected');
-                                var rowIndex=$('#maintain_dg').edatagrid('getRowIndex',row);
-                                var ed= $('#maintain_dg').edatagrid('getEditor',{index:rowIndex,field:'type'});
+                                var row =$('#scrap_dg').edatagrid('getSelected');
+                                var rowIndex=$('#scrap_dg').edatagrid('getRowIndex',row);
+                                var ed= $('#scrap_dg').edatagrid('getEditor',{index:rowIndex,field:'type'});
                                 var equName=$(ed.target).combobox('getValue');
                                 var comboxData=$(this).combobox('getData');
                                 console.info(comboxData);
@@ -101,28 +99,17 @@
                         }
                     }
                 },
-
-                {field:'recDesc',title:'维修详情',width:100,
+                {field:'scrapName',title:'报废申请人',width:100,
                     editor:{
                         type:'validatebox',options:{required:true}
                     }
                 },
-                {field:'maintainResult',title:'维修结果',width:100,
+                {field:'scrapResult',title:'报废申请结果',width:100,
                     editor:{
                         type:'validatebox',options:{required:true}
                     }
                 },
-                {field:'recDate',title:'维修日期',width:100,
-                    editor:{
-                        type:'datebox',
-                        options:{
-                            editable:false,
-                            required:true,
-                            validType:'compareToday'
-                        }
-                    }
-                },
-                {field:'maintainName',title:'维修人',width:100,
+                {field:'scrapDate',title:'报废日期',width:100,
                     editor:{
                         type:'validatebox',options:{required:true}
                     }
@@ -138,14 +125,14 @@
         remoteSort:false,
         sortName:'id',      //排序字段
         sortOrder:'asc',    //升序
-        toolbar:'#maintain_toolbar',//设置工具栏
+        toolbar:'#scrap_toolbar',//设置工具栏
         // 如果没有数据，就增加提示
         onLoadSuccess:function(data){
             if (data.total == 0) {
                 //添加一个新数据行，第一列的值为你需要的提示信息，然后将其他列合并到第一列来，注意修改colspan参数为你columns配置的总列数
-                $(this).edatagrid('appendRow', { id: '<div style="text-align:center;color:red">没有相关记录！</div>' })
-                    .edatagrid('mergeCells', { index: 0, field: 'id', colspan: 7 })
-                    .edatagrid('hideColumn','ck');
+                $(this).datagrid('appendRow', { id: '<div style="text-align:center;color:red">没有相关记录！</div>' })
+                    .datagrid('mergeCells', { index: 0, field: 'id', colspan: 7 })
+                    .datagrid('hideColumn','ck');
                 //隐藏分页导航条，这个需要熟悉datagrid的html结构，直接用jquery操作DOM对象，easyui datagrid没有提供相关方法隐藏导航条
                 $(this).closest('div.datagrid-wrap').find('div.datagrid-pager').hide();
             }
@@ -155,7 +142,7 @@
     });
 
     //设置分页控件
-    var p=$('#maintain_dg').edatagrid('getPager');
+    var p=$('#scrap_dg').datagrid('getPager');
     $(p).pagination({
         pageSize:10,
         pageList:[5,10,15],
@@ -163,7 +150,6 @@
         afterPageText:'页    共{pages}页',
         displayMsg:'当前显示 {from} - {to} 条记录  共 {total} 条记录'
     });
-
     //扩展dategrid的datebox验证
     $.extend($.fn.validatebox.defaults.rules, {
         compareToday:{

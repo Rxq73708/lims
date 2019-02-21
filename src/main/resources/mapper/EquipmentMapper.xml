@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.dsj.lims.dao.EquipmentMapper">
+<!--查询详情-->
+    <select id="listEquipment" resultType="Equipment">
+        SELECT id,equName,type
+        FROM equipment GROUP BY equName,type
+    </select>
     <!--查询所有设备信息-->
     <select id="findEquipmentAll" resultType="Equipment">
         select e.id,code,equName,type,equDesc,instruction,buyDate,proName,startDate,useStatus,place
@@ -34,19 +39,19 @@
     </select>
     <!--查询维修信息-->
     <select id="findMaintain" resultType="Maintain">
-         SELECT m.`id`,e.`equName`,m.`recDesc`,m.`maintainResult`,m.`recDate`,m.`maintainName`
-         FROM maintain AS m,equipment AS e WHERE m.`equipmentId`=e.`code`
-         where equName like concat('%',#{equName},'%')
+     SELECT m.`id`,e.`equName`,e.type,m.`recDesc`,m.`maintainResult`,m.`recDate`,m.`maintainName`
+         FROM maintain AS m,equipment AS e WHERE m.`equipmentId`=e.`id`
+         and equName like concat('%',#{equName},'%')
          limit #{start},#{size};
    </select>
     <!--添加维修信息-->
     <insert id="addMaintain" parameterType="Maintain">
-        INSERT INTO maintain(equipmentId,recDesc,maintainResult,recDate,maintainName)
-        values(#{equipmentId},#{recDesc},#{maintainResult},#{recDate},#{maintainName})
+        INSERT INTO maintain(equipmentId,type,recDesc,maintainResult,recDate,maintainName)
+        values(#{equipmentId},#{type},#{recDesc},#{maintainResult},#{recDate},#{maintainName})
     </insert>
     <!--修改维修信息-->
     <update id="updateMaintain" parameterType="Maintain">
-        UPDATE maintain SET equipmentId=#{equipmentId},recDesc=#{recDesc},
+        UPDATE maintain SET recDesc=#{recDesc},
         maintainResult=#{maintainResult},recDate=#{recDate},maintainName=#{maintainName}
      WHERE id=#{id};
     </update>
@@ -60,19 +65,19 @@
     </select>
     <!--查询保养信息-->
     <select id="findMaintenance" resultType="maintenance">
-        SELECT m.`id`,e.`equName`,m.maintenanceContent,m.maintenanceName,m.maintenanceDate
-        FROM maintenance AS m,equipment AS e WHERE m.`equipmentId`=e.`code`
-        where equName like concat('%',#{equName},'%')
+        SELECT m.`id`,e.type,e.`equName`,m.`maintenanceContent`,m.`maintenanceName`,m.`maintenanceDate`
+         FROM maintenance AS m,equipment AS e WHERE m.`equipmentId`=e.`id`
+        and equName like concat('%',#{equName},'%')
         limit #{start},#{size};
     </select>
     <!--添加保养信息-->
     <insert id="addMaintenance" parameterType="maintenance">
-        INSERT INTO maintenance(equipmentId,maintenanceContent,maintenanceName,maintenanceDate)
-        VALUES (#{equipmentId},#{maintenanceContent},#{maintenanceName},#{maintenanceDate})
+        INSERT INTO maintenance(equipmentId,type,equName,maintenanceContent,maintenanceName,maintenanceDate)
+        VALUES (#{equipmentId},#{type},#{equName},#{maintenanceContent},#{maintenanceName},#{maintenanceDate})
     </insert>
     <!--修改保养信息-->
     <update id="updateMaintenanceById" parameterType="maintenance">
-        UPDATE maintenance SET equipmentId= #{equipmentId},maintenanceContent= #{maintenanceContent},
+        UPDATE maintenance SET maintenanceContent= #{maintenanceContent},
         maintenanceName= #{maintenanceName},maintenanceDate= #{maintenanceDate}
         WHERE id=#{id};
     </update>
@@ -86,19 +91,19 @@
     </select>
     <!--查询报废信息-->
     <select id="findScrap" resultType="scrap">
-        SELECT s.`id`,e.`equName`,s.`scrapCause`,s.`scrapResult`,s.`scrapName`,s.`scrapDate`
-        FROM scrap AS s,equipment AS e WHERE s.`equipmentId`=e.`code`
-        where equName like concat('%',#{equName},'%')
+        SELECT s.`id`,e.type,e.`equName`,s.`scrapCause`,s.`scrapResult`,s.`scrapName`,s.`scrapDate`
+        FROM scrap AS s,equipment AS e WHERE s.`equipmentId`=e.`id`
+        and equName like concat('%',#{equName},'%')
         limit #{start},#{size};
     </select>
     <!--添加报废信息-->
     <insert id="addScrap" parameterType="scrap">
-        INSERT INTO scrap(equipmentId,scrapCause,scrapName,scrapResult,scrapDate)
-        VALUES (#{equipmentId},#{scrapCause},#{scrapName},#{scrapResult},#{scrapDate})
+        INSERT INTO scrap(equipmentId,type,equName,scrapCause,scrapName,scrapResult,scrapDate)
+        VALUES (#{equipmentId},#{type},#{equName},#{scrapCause},#{scrapName},#{scrapResult},#{scrapDate})
     </insert>
     <!--修改报废信息-->
     <update id="updateScrap" parameterType="scrap">
-         UPDATE scrap SET equipmentId=#{equipmentId},scrapCause=#{scrapCause},
+         UPDATE scrap SET scrapCause=#{scrapCause},
          scrapName=#{scrapName},scrapResult=#{scrapResult},scrapDate=#{scrapDate}
          WHERE id= #{id};
     </update>

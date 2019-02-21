@@ -10,7 +10,7 @@ public interface AssessMapper {
      * 查询
      * @return
      */
-    public List<Assess> getAssessList(@Param("empName") String empName,@Param("start") int start, @Param("size") int size);
+    public List<Assess> getAssessList(@Param("empName") String empName, @Param("start") int start, @Param("size") int size);
 
     /**
      * 添加

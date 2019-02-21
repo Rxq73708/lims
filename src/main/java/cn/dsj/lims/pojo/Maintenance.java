@@ -1,11 +1,18 @@
 package cn.dsj.lims.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Maintenance {
     private int id;//保养序号
-    private int equipmentId;//设备编码
+    private int code;//设备编码
+    private String type;//设备型号
+    private int equipmentId;//设备id
     private String equName;//设备名称
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date maintenanceDate;//保养日期
     private String maintenanceName;//保养人
     private String maintenanceContent;//保养内容
@@ -14,8 +21,10 @@ public class Maintenance {
         super();
     }
 
-    public Maintenance(int id, int equipmentId, String equName, Date maintenanceDate, String maintenanceName, String maintenanceContent) {
+    public Maintenance(int id, int code, String type, int equipmentId, String equName, Date maintenanceDate, String maintenanceName, String maintenanceContent) {
         this.id = id;
+        this.code = code;
+        this.type = type;
         this.equipmentId = equipmentId;
         this.equName = equName;
         this.maintenanceDate = maintenanceDate;
@@ -23,12 +32,12 @@ public class Maintenance {
         this.maintenanceContent = maintenanceContent;
     }
 
-    public int getId() {
-        return id;
+    public String getType() {
+        return type;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getEquipmentId() {
@@ -37,6 +46,22 @@ public class Maintenance {
 
     public void setEquipmentId(int equipmentId) {
         this.equipmentId = equipmentId;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEquName() {

@@ -1,12 +1,19 @@
 package cn.dsj.lims.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Maintain {
     private int id;//维修序号
-    private int equipmentId;//设备编码
+    private int code;//设备编码
+    private String type;//设备型号
+    private  int equipmentId;//设备id
     private String equName;//设备名称
     private String maintainName;//维修人
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date recDate;//维修日期
     private String recDesc;//维修详情
     private String maintainResult;//维修结果
@@ -15,8 +22,10 @@ public class Maintain {
         super();
     }
 
-    public Maintain(int id, int equipmentId, String equName, String maintainName, Date recDate, String recDesc, String maintainResult) {
+    public Maintain(int id, int code, String type, int equipmentId, String equName, String maintainName, Date recDate, String recDesc, String maintainResult) {
         this.id = id;
+        this.code = code;
+        this.type = type;
         this.equipmentId = equipmentId;
         this.equName = equName;
         this.maintainName = maintainName;
@@ -25,12 +34,20 @@ public class Maintain {
         this.maintainResult = maintainResult;
     }
 
-    public int getId() {
-        return id;
+    public String getType() {
+        return type;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public int getEquipmentId() {
@@ -39,6 +56,14 @@ public class Maintain {
 
     public void setEquipmentId(int equipmentId) {
         this.equipmentId = equipmentId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEquName() {
