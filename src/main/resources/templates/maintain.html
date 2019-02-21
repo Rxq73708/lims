@@ -1,26 +1,177 @@
-<!-- 引入框架 -->
-<div th:replace="frame::html"></div>
 
-<table border="1" style="width:900px;">
-    <tr>
-        <th>维修序号</th>
-        <th>设备名称</th>
-        <th>设备型号</th>
-        <th>维修详情</th>
-        <th>维修结果</th>
-        <th>维修人</th>
-        <th>维修日期</th>
-    </tr>
-    <tr th:each="equipment:${list}">
-        <td th:text="${equipment.id}"></td>
-        <td th:text="${equipment.equName}"></td>
-        <td th:text="${equipment.type}"></td>
-        <td th:text="${equipment.recDesc}"></td>
-        <td th:text="${equipment.maintainResult}"></td>
-        <td th:text="${equipment.maintainName}"></td>
-        <td th:text="${equipment.recDate}"></td>
-    </tr>
-</table>
-</form>
-</body>
-</html>
+<!--工具栏-->
+<!--<div id="processedReq_toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="">查询</a>
+</div>-->
+<div id="maintain_toolbar" style="padding:5px;height: auto">
+    <div style="float: right;left: 50px">
+        <input style="width: 250px" class="easyui-textbox" data-options="prompt:'请输入仪器名称...',
+        icons:[
+        {
+            iconCls:'icon-clear',
+            handler:function(e){
+                $(e.data.target).textbox('setValue','');
+            }
+        },
+        {
+            iconCls:'icon-search',
+            handler: function(e){
+                var v = $(e.data.target).textbox('getValue');
+                $('#maintain_dg').datagrid('load',{
+                searchName: $('#searchName').val()
+              });
+            }
+		}]" type="text" id="searchName"/>
+        <!--<a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearch()">查询</a>-->
+    </div>
+    <div>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+           onclick="javascript:$('#maintain_dg').edatagrid('addRow')">新建</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+           onclick="javascript:$('#maintain_dg').edatagrid('destroyRow')">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+           onclick="javascript:$('#maintain_dg').edatagrid('saveRow')">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+           onclick="javascript:$('#maintain_dg').edatagrid('cancelRow')">取消</a>
+    </div>
+</div>
+</div>
+<table id="maintain_dg"></table>
+<script>
+    $('#maintain_dg').edatagrid({
+        url:'/findMaintain',//数据源
+        saveUrl: '/addMaintain',
+        updateUrl: '/updateMaintain',
+        destroyUrl: '/deleteMaintain',
+        columns:[
+            [
+                {field:'id',title:'编号',width:100},
+
+                {field:'equName',title:'设备名称',width:100,
+                    editor:{
+                        type:'combobox',
+                        options:{
+                            editable:false,
+                            panelHeight:'auto',
+                            required:true,
+                            url:'/listEquipment',
+                            valueField:'id',
+                            textField:'equName',
+                            onLoadSuccess:function(){
+                                var row =$('#maintain_dg').edatagrid('getSelected');
+                                var rowIndex=$('#maintain_dg').edatagrid('getRowIndex',row);
+                                var ed= $('#maintain_dg').edatagrid('getEditor',{index:rowIndex,field:'equName'});
+                                var equName=$(ed.target).combobox('getValue');
+                                var comboxData=$(this).combobox('getData');
+                                console.info(comboxData);
+                                for(var i=0;i<comboxData.length;i++){
+                                    if(comboxData[i].equName==equName){
+                                        $(this).combobox('select',comboxData[i].id);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {field:'type',title:'设备型号',width:100,
+                    editor:{
+                        type:'combobox',
+                        options:{
+                            editable:false,
+                            panelHeight:'auto',
+                            required:true,
+                            url:'/listEquipment',
+                            valueField:'id',
+                            textField:'type',
+                            onLoadSuccess:function(){
+                                var row =$('#maintain_dg').edatagrid('getSelected');
+                                var rowIndex=$('#maintain_dg').edatagrid('getRowIndex',row);
+                                var ed= $('#maintain_dg').edatagrid('getEditor',{index:rowIndex,field:'type'});
+                                var equName=$(ed.target).combobox('getValue');
+                                var comboxData=$(this).combobox('getData');
+                                console.info(comboxData);
+                                for(var i=0;i<comboxData.length;i++){
+                                    if(comboxData[i].type==type){
+                                        $(this).combobox('select',comboxData[i].id);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
+                {field:'recDesc',title:'维修详情',width:100,
+                    editor:{
+                        type:'validatebox',options:{required:true}
+                    }
+                },
+                {field:'maintainResult',title:'维修结果',width:100,
+                    editor:{
+                        type:'validatebox',options:{required:true}
+                    }
+                },
+                {field:'recDate',title:'维修日期',width:100,
+                    editor:{
+                        type:'datebox',
+                        options:{
+                            editable:false,
+                            required:true,
+                            validType:'compareToday'
+                        }
+                    }
+                },
+                {field:'maintainName',title:'维修人',width:100,
+                    editor:{
+                        type:'validatebox',options:{required:true}
+                    }
+                }
+            ]
+        ],
+        fit:false,
+        pagination:true,
+        idField:'id',
+        rownumbers:true,
+        fitColumns:true,
+        singleSelect:true, //false:多选，true:单选
+        remoteSort:false,
+        sortName:'id',      //排序字段
+        sortOrder:'asc',    //升序
+        toolbar:'#maintain_toolbar',//设置工具栏
+        // 如果没有数据，就增加提示
+        onLoadSuccess:function(data){
+            if (data.total == 0) {
+                //添加一个新数据行，第一列的值为你需要的提示信息，然后将其他列合并到第一列来，注意修改colspan参数为你columns配置的总列数
+                $(this).edatagrid('appendRow', { id: '<div style="text-align:center;color:red">没有相关记录！</div>' })
+                    .edatagrid('mergeCells', { index: 0, field: 'id', colspan: 7 })
+                    .edatagrid('hideColumn','ck');
+                //隐藏分页导航条，这个需要熟悉datagrid的html结构，直接用jquery操作DOM对象，easyui datagrid没有提供相关方法隐藏导航条
+                $(this).closest('div.datagrid-wrap').find('div.datagrid-pager').hide();
+            }
+            //如果通过调用reload方法重新加载数据有数据时显示出分页导航容器
+            else $(this).closest('div.datagrid-wrap').find('div.datagrid-pager').show();
+        }
+    });
+
+    //设置分页控件
+    var p=$('#maintain_dg').edatagrid('getPager');
+    $(p).pagination({
+        pageSize:10,
+        pageList:[5,10,15],
+        beforePageText:'第',
+        afterPageText:'页    共{pages}页',
+        displayMsg:'当前显示 {from} - {to} 条记录  共 {total} 条记录'
+    });
+
+    //扩展dategrid的datebox验证
+    $.extend($.fn.validatebox.defaults.rules, {
+        compareToday:{
+            validator: function (value) {
+                var date = new Date();
+                return Date.parse(value) <= Date.parse(date);
+            },
+            message: '所选日期应不大于当前时间!'
+        }
+    });
+</script>

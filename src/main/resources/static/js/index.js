@@ -18,6 +18,13 @@ $(function () {
                     href:'/user',
                     closable:true
                 });
+            } else if($(this).text()=="部门管理制度"){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/systems',
+                    closable:true
+                });
             } else if($(this).text()=="待处理检测申请"){
                 $('#tt').tabs('add',{
                     title:$(this).text(),
@@ -67,7 +74,28 @@ $(function () {
                     href:'/inspectionStandardsDoc',
                     closable:true
                 });
-            } else{
+            }else if($(this).text()=='报废记录'){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/scrap',
+                    closable:true
+                });
+            } else if($(this).text()=='维修记录'){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/maintain',
+                    closable:true
+                });
+            }else if($(this).text()=='保养记录'){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/maintenance',
+                    closable:true
+                });
+            }else{
                 $('#tt').tabs('add',{
                     title:$(this).text(),
                     cache:true,
@@ -75,6 +103,13 @@ $(function () {
                     closable:true
                 });
             }
+        }else if($(this).text()=="部门组织结构"){
+            $('#tt').tabs('add',{
+                title:$(this).text(),
+                cache:true,
+                href:'/structure',
+                closable:true
+            });
         }else{
             $('#tt').tabs('select',$(this).text());
         }

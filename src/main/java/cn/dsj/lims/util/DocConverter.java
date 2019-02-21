@@ -24,7 +24,7 @@ public class DocConverter {
 
     private final String OPEN_OFFICE_HOST = "127.0.0.1"; //open office运行的host
     private final Integer OPEN_OFFICE_PORT = 8100; //open office运行的端口号，默认8100
-    private final String SWFTOOLS_HOME = "D:/swfTools/"; //swfTools的安装路径
+    private final String SWFTOOLS_HOME = "F:/swfTools/"; //swfTools的安装路径
 
     public DocConverter(String fileString) {
         ini(fileString);

@@ -1,22 +1,31 @@
 package cn.dsj.lims.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Scrap {
     private int id;//报废编号
-    private int equipmentId;//设备编码
+    private int code;//设备编码
+    private String type;//设备型号
+    private int equipmentId;//设备
     private String equName;//设备名称
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date scrapDate;//报废日期
     private String scrapCause;//报废原因
     private String scrapName;//报废申请人
-    private int scrapResult;//1、是/2、否
+    private String scrapResult;//报废申请结果
 
     public Scrap() {
         super();
     }
 
-    public Scrap(int id, int equipmentId, String equName, Date scrapDate, String scrapCause, String scrapName, int scrapResult) {
+    public Scrap(int id, int code, String type, int equipmentId, String equName, Date scrapDate, String scrapCause, String scrapName, String scrapResult) {
         this.id = id;
+        this.code = code;
+        this.type = type;
         this.equipmentId = equipmentId;
         this.equName = equName;
         this.scrapDate = scrapDate;
@@ -25,12 +34,12 @@ public class Scrap {
         this.scrapResult = scrapResult;
     }
 
-    public int getId() {
-        return id;
+    public String getType() {
+        return type;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getEquipmentId() {
@@ -39,6 +48,22 @@ public class Scrap {
 
     public void setEquipmentId(int equipmentId) {
         this.equipmentId = equipmentId;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEquName() {
@@ -73,11 +98,11 @@ public class Scrap {
         this.scrapName = scrapName;
     }
 
-    public int getScrapResult() {
+    public String getScrapResult() {
         return scrapResult;
     }
 
-    public void setScrapResult(int scrapResult) {
+    public void setScrapResult(String scrapResult) {
         this.scrapResult = scrapResult;
     }
 }

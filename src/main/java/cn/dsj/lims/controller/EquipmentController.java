@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,7 +18,10 @@ import java.util.Map;
 public class EquipmentController {
     @Resource
     private EquipmentService equipmentService;
-
+    @RequestMapping("/listEquipment")
+    public List<Equipment> listEquipment(){
+        return equipmentService.listEquipment();
+    };
     @RequestMapping("/findEquipmentAll")
     public Map<String, Object> list(int page, int rows, String searchName) {
         System.out.println("list");
@@ -64,6 +68,7 @@ public class EquipmentController {
 
     @RequestMapping("/addMaintain")
     public String addMaintain(Maintain maintain) {
+        maintain.setEquipmentId(Integer.parseInt(maintain.getEquName()));
         System.out.println("insert......");
         if (equipmentService.addMaintain(maintain))
             return "turn";
@@ -96,6 +101,7 @@ public class EquipmentController {
 
     @RequestMapping("/addMaintenance")
     public String addMaintenance(Maintenance maintenance) {
+        maintenance.setEquipmentId(Integer.parseInt(maintenance.getEquName()));
         System.out.println("insert......");
         if (equipmentService.addMaintenance(maintenance))
             return "turn";
@@ -128,6 +134,7 @@ public class EquipmentController {
 
     @RequestMapping("/addScrap")
     public String addScrap(Scrap scrap) {
+        scrap.setEquipmentId(Integer.parseInt(scrap.getEquName()));
         System.out.println("insert......");
         if (equipmentService.addScrap(scrap))
             return "turn";

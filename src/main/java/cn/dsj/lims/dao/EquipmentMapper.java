@@ -12,6 +12,11 @@ import java.util.List;
 @Mapper
 public interface EquipmentMapper {
     /**
+     * 设备详情
+     * @return
+     */
+    public List<Equipment> listEquipment();
+    /**
      * 设备详情信息
      * @return
      */

@@ -67,4 +67,33 @@ public class ViewController {
         return "processedReq";
     }
 
+    @RequestMapping("/scrap")
+    public String scrap(){
+        System.out.println("scrap...");
+        return "scrap";
+    }
+
+    @RequestMapping("/maintain")
+    public String maintain(){
+        System.out.println("maintain...");
+        return "maintain";
+    }
+
+    @RequestMapping("/maintenance")
+    public String maintenance(){
+        System.out.println("maintenance...");
+        return "maintenance";
+    }
+
+    @RequestMapping("/systems")
+    public String systems(){
+        System.out.println("systems...");
+        return "systems";
+    }
+
+    @RequestMapping("/structure")
+    public String structure(){
+        System.out.println("structure...");
+        return "structure";
+    }
 }
