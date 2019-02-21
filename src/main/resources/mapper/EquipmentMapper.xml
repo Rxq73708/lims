@@ -40,7 +40,7 @@
     <!--查询维修信息-->
     <select id="findMaintain" resultType="Maintain">
      SELECT m.`id`,e.`equName`,e.type,m.`recDesc`,m.`maintainResult`,m.`recDate`,m.`maintainName`
-         FROM maintain AS m,equipment AS e WHERE m.`equipmentId`=e.`id`
+         FROM maintain AS m,equipment AS e WHERE m.`equipmentId`=e.`code`
          and equName like concat('%',#{equName},'%')
          limit #{start},#{size};
    </select>
@@ -66,7 +66,7 @@
     <!--查询保养信息-->
     <select id="findMaintenance" resultType="maintenance">
         SELECT m.`id`,e.type,e.`equName`,m.`maintenanceContent`,m.`maintenanceName`,m.`maintenanceDate`
-         FROM maintenance AS m,equipment AS e WHERE m.`equipmentId`=e.`id`
+         FROM maintenance AS m,equipment AS e WHERE m.`equipmentId`=e.`code`
         and equName like concat('%',#{equName},'%')
         limit #{start},#{size};
     </select>
@@ -92,7 +92,7 @@
     <!--查询报废信息-->
     <select id="findScrap" resultType="scrap">
         SELECT s.`id`,e.type,e.`equName`,s.`scrapCause`,s.`scrapResult`,s.`scrapName`,s.`scrapDate`
-        FROM scrap AS s,equipment AS e WHERE s.`equipmentId`=e.`id`
+        FROM scrap AS s,equipment AS e WHERE s.`equipmentId`=e.`code`
         and equName like concat('%',#{equName},'%')
         limit #{start},#{size};
     </select>
