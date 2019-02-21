@@ -2,9 +2,25 @@
     <thead>
     <tr>
         <th field="id" width="20" align="center" halign="center" sortable="true">编号</th>
-        <th field="empName" width="100" align="center" halign="center"
-            editor="{type:'validatebox',options:{required:true}}">姓名
-        </th>
+
+        <th field="empName" width="50" editor="{type:'combobox',options:{editable:false,panelHeight:'auto',required:true,
+        url:'/employee',
+        valueField:'id',
+        textField:'empName',
+        onLoadSuccess:function(){
+            var row =$('#assess_dg').edatagrid('getSelected');
+            var rowIndex=$('#assess_dg').edatagrid('getRowIndex',row);
+            var ed= $('#assess_dg').edatagrid('getEditor',{index:rowIndex,field:'empName'});
+            var proName=$(ed.target).combobox('getValue');
+            var comboxData=$(this).combobox('getData');
+            for(var i=0;i<comboxData.length;i++){
+                if(comboxData[i].empName==empName){
+                    $(this).combobox('select',comboxData[i].id);
+                    break;
+                }
+            }
+        }}}" align="center" halign="center">姓名
+    </th>
         <th field="assessDate" width="50" align="center" halign="center"
             editor="{type:'datebox',options:{required:true}}" sortable="true">考核日期
         </th>
@@ -12,7 +28,7 @@
             editor="{type:'validatebox',options:{required:true}}">领导签字
         </th>
         <th field="details" width="50" align="center" halign="center"
-            editor="{type:'validatebox',options:{required:true}}">考核表路径
+            editor="{type:'validatebox',options:{required:true}}">考核表详情
         </th>
     </tr>
     </thead>
@@ -47,6 +63,10 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
            onclick="javascript:$('#assess_dg').edatagrid('cancelRow')">取消</a>
     </div>
+</div>
+<!--右键菜单栏-->
+<div id="menu" class="easyui-menu" style="width: 50px;display: none">
+    <div onclick="view()">查看</div>
 </div>
 <script>
     $(function () {
@@ -83,6 +103,16 @@
                     title: '删除',
                     msg: '你真的要删除该考核记录吗？'
                 }
+            },
+            onRowContextMenu:function (e,rowIndex,rowData) {
+                e.preventDefault(); //阻止浏览器捕获右键事件
+                $(this).datagrid("clearSelections"); //取消所有选中项
+                $(this).datagrid("selectRow", rowIndex); //根据索引选中该行
+                $('#menu').menu('show', {
+                    //在鼠标点击处显示菜单
+                    left: e.pageX,
+                    top: e.pageY
+                });
             }
         });
 
@@ -97,10 +127,18 @@
         });
     });
 
-    //查询方法
-    // function doSearch() {
-    //     $('#assess_dg').datagrid('load', {
-    //         searchName: $('#searchName').val()
-    //     });
-    // }
+    //查看信息
+    function view() {
+        var view ='考核明细';
+        if(!$('#tt').tabs('exists',view)){
+            $('#tt').tabs('add',{
+                title:view,
+                cache:true,
+                href:'/assessCheckitem',
+                closable:true
+            });
+        }else{
+            $('#tt').tabs('select',view);
+        }
+    }
 </script>

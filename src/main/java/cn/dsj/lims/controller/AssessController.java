@@ -24,6 +24,7 @@ public class AssessController {
 //添加
     @RequestMapping("/add")
     public String assessAdd(Assess assess) {
+        assess.setAssessId(Integer.parseInt(assess.getEmpName()));
         System.out.println("assessAdd..........");
         if (assessService.assessAdd(assess))
             return "true";

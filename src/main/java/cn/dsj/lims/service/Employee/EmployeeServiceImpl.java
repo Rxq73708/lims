@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Description：
@@ -19,6 +20,11 @@ import javax.annotation.Resource;
 public class EmployeeServiceImpl implements EmployeeService {
     @Resource
     private EmployeeMapper employeeMapper;
+
+    @Override
+    public List<Employee> getEmployeeList() {
+        return employeeMapper.getEmployeeList();
+    }
 
     @Override
     public Employee getOneByUserId(int userId) {

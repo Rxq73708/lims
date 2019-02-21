@@ -25,21 +25,21 @@ private AssessMapper assessMapper;
 
     @Override
     public boolean assessAdd(Assess assess) {
-        if(assessMapper.AssessAdd(assess)>0)
+        if(assessMapper.assessAdd(assess)>0)
             return true;
         return false;
     }
 
     @Override
     public boolean assessUpdate(Assess assess) {
-        if(assessMapper.AssessUpdate(assess)>0)
+        if(assessMapper.assessUpdate(assess)>0)
         return true;
             return false;
     }
 
     @Override
     public boolean assessDelete(int id) {
-        if(assessMapper.AssessDelete(id)>0)
+        if(assessMapper.assessDelete(id)>0)
             return true;
         return false;
     }

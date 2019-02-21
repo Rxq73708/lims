@@ -66,5 +66,16 @@ public class ViewController {
         System.out.println("processedReq...");
         return "processedReq";
     }
+    @RequestMapping("/assess")
+    public String assess(){
+        System.out.println("assess...");
+        return "assess";
+    }
+
+    @RequestMapping("/assessCheckitem")
+    public String assessCheckitem(){
+        System.out.println("assessCheckitem...");
+        return "assessCheckitem";
+    }
 
 }
