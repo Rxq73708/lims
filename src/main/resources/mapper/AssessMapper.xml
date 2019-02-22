@@ -5,7 +5,7 @@
     <select id="getAssessList" resultType="Assess">
          select a.*,e.empName
     from Assess as a,employee as e
-    where a.assessId=e.staffId and empName like CONCAT('%',#{empName},'%')
+    where a.assessId=e.id and empName like CONCAT('%',#{empName},'%')
     limit #{start},#{size};
 </select>
     <!--增加-->
