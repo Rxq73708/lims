@@ -17,12 +17,12 @@
 
     <!--增加-->
 <insert id="assessAdd" >
-    insert into assess(assessId,assessDate,signature,details)
+    insert into assess(empId,assessDate,signature,details)
     values(#{assessId},#{assessDate},#{signature},#{details})
 </insert>
     <!--修改-->
     <update id="assessUpdate">
-update assess set assessId=#{assessId},assessDate=#{assessDate},signature=#{signature},details=#{details}
+update assess set empId=#{empId},assessDate=#{assessDate},signature=#{signature},details=#{details}
 where id=#{id};
     </update>
     <!--删除-->

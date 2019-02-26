@@ -1,0 +1,85 @@
+<meta charset="UTF-8">
+<input id="staffId" hidden th:value="${staffId}">
+<table style="margin:auto;" border="1">
+			<tr>
+				<td colspan="6" style="text-align:center"><h2>个人信息</h2></td>
+			</tr>
+			<tr style="height:35px">
+				<td style="text-align: center">姓名</td>
+				<td style="text-align:center" id="empName1"></td>
+				<td width= "100" style="text-align: center">性别</td>
+				<td style="text-align:center" id="gender"></td>
+				<td colspan="2" rowspan="4" style="width:150px" id="photo">照片</td>
+			</tr>
+			<tr style="height:35px">
+				<td style="text-align: center">年龄</td>
+				<td style="text-align:center" id="age"></td>
+				<td style="text-align: center">民族</td>
+				<td style="text-align:center" id="nation"></td>
+			</tr>
+			<tr style="height:35px">
+				<td style="text-align: center">毕业时间</td>
+				<td style="text-align: center" id="graduationDate"></td>
+				<td style="text-align: center">婚姻状况</td>
+				<td style="text-align: center" id="marriage"></td>
+			</tr>
+			<tr style="height:35px">
+				<td style="text-align: center">联系电话</td>
+				<td style="width: 150px"  id="phone"></td>
+				<td style="text-align: center">Email</td>
+				<td style="width: 150px" id="email"></td>
+			</tr>
+			<tr style="height:40px">
+				<td style="text-align: center">家庭住址</td>
+				<td colspan="4" style="text-align: center" id="address"></td>
+			</tr>
+			<tr style="height:40px">
+				<td style="text-align: center">毕业学校</td>
+				<td colspan="4" style="text-align: center" id="school"></td>
+			</tr>
+			<tr style="height:40px">
+				<td style="text-align: center">专业</td>
+				<td colspan="4" style="text-align: center" id="profession"></td>
+			</tr>
+			<tr style="height:40px">
+				<td style="text-align: center">学历</td>
+				<td colspan="4" style="text-align: center" id="educationBackground"></td>
+			</tr>
+			<tr >
+				<td height="100"  width= "100" style="text-align: center">工作经验</td>
+				<td colspan="4" style="text-align: center" id="workExperience"></td>
+			</tr>
+			<tr>
+				<td height="100" style="text-align: center">奖励情况</td>
+				<td colspan="4" style="text-align: center" id="award"></td>
+			</tr>
+			<tr>
+				<td height="100" style="text-align: center">处罚情况</td>
+				<td colspan="4" style="text-align: center" id="punish"></td>
+			</tr>
+</table>
+<script>
+	$(function () {
+        $.get('/employee/listDetails/'+$('#staffId').val(),function (data) {
+            console.info(data.empName);
+            $('#empName1').text(data.empName);
+            $('#age').text(data.age);
+            $('#gender').text(data.gender);
+            $('#nation').text(data.nation);
+            $('#graduationDate').text(data.graduationDate);
+            $('#marriage').text(data.marriage);
+            $('#phone').text(data.phone);
+            $('#email').text(data.email);
+            $('#address').text(data.address);
+            $('#school').text(data.school);
+            $('#profession').text(data.profession);
+            $('#educationBackground').text(data.educationBackground);
+            $('#workExperience').text(data.workExperience);
+            $('#award').text(data.award);
+            $('#punish').text(data.punish);
+            $('#photo').text(data.photo);
+
+        })
+    });
+</script>
+
