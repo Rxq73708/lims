@@ -15,7 +15,7 @@ $(function () {
                 $('#tt').tabs('add',{
                     title:$(this).text(),
                     cache:true,
-                    href:'/user',
+                    href:'/employees',
                     closable:true
                 });
             } else if($(this).text()=="部门组织结构"){
