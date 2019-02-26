@@ -71,16 +71,6 @@ public class Employee {
         this.deptName = deptName;
     }
 
-    private String deptName;//部门名称
-
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
-
     public int getId() {
         return id;
     }
