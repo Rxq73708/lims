@@ -46,7 +46,16 @@ $(function () {
                     href:'/processedReq',
                     closable:true
                 });
-            } else if($(this).text()=="文库管理"){
+            }
+            else if($(this).text()=="试剂管理"){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/consumable',
+                    closable:true
+                });
+            }
+            else if($(this).text()=="文库管理"){
                 $('#tt').tabs('add',{
                     title:$(this).text(),
                     cache:true,

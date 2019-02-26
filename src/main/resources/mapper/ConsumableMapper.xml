@@ -3,8 +3,17 @@
 <mapper namespace="cn.dsj.lims.dao.ConsumableMapper">
 
     <!-- 查询所有信息 -->
+    <select id="getListConsumable" resultType="Consumable">
+         SELECT id,materialName
+        FROM consumable GROUP BY materialName
+    </select>
     <select id="getList" resultType="Consumable">
-        select * from consumable
+          select c.id,materialName,production_date,specification,materialDesc,materialType,
+          get_count,unit,shelf_location,shelf_life,unit_price,proName,remark
+        from consumable c,provider p
+        where c.proId=p.id
+        and materialName like concat('%',#{materialName},'%')
+        limit #{start},#{size};
     </select>
 
     <!-- 添加信息 -->
@@ -25,4 +34,8 @@
     <delete id="deleteList" parameterType="Integer">
         delete from consumable where id=#{id}
     </delete>
+    <!--查询总记录数-->
+    <select id="count" resultType="int">
+      select count(1) from consumable;
+    </select>
 </mapper>

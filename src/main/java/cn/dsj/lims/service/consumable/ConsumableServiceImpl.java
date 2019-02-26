@@ -5,7 +5,9 @@ import cn.dsj.lims.pojo.Consumable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ConsumableServiceImpl implements ConsumableService{
@@ -14,27 +16,37 @@ public class ConsumableServiceImpl implements ConsumableService{
     private ConsumableMapper consumableMapper;
 
     @Override
-    public List<Consumable> getList() {
-        return consumableMapper.getList();
+    public List<Consumable> getListConsumable() {
+        return consumableMapper.getListConsumable();
     }
 
     @Override
-    public int addList(Consumable consumable) {
-        return consumableMapper.addList(consumable);
+    public Map<String, Object> getList(String materialName, int pageNo, int pageSize) {
+        Map<String,Object> map=new HashMap<>();
+        int start=(pageNo-1)*pageSize;
+        map.put("total",consumableMapper.count());
+        map.put("rows",consumableMapper.getList( materialName,  start, pageSize));
+        return map;
     }
 
     @Override
-    public int updateList(Consumable consumable) {
-        return consumableMapper.updateList(consumable);
+    public boolean addList(Consumable consumable) {
+        if(consumableMapper.addList(consumable)>0)
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean updateList(Consumable consumable) {
+        if(consumableMapper.updateList(consumable)>0)
+            return true;
+        return false;
     }
 
     @Override
     public boolean deleteList(int id) {
-       int i = consumableMapper.deleteList(id);
-       if(i>0){
-           return true;
-       }else{
-           return false;
-       }
+        if (consumableMapper.deleteList(id) > 0)
+            return true;
+        return false;
     }
 }

@@ -2,10 +2,8 @@ package cn.dsj.lims.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Description：
@@ -122,6 +120,9 @@ public class ViewController {
         model.addAttribute("staffId",staffId);
         return "employeeDetails";
     }
-
-
+    @RequestMapping("/consumable")
+    public String consumable(){
+        System.out.println("consumable.........");
+        return "consumable";
+    }
 }
