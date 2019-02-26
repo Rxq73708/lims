@@ -9,7 +9,14 @@ import java.util.List;
 
 public interface CheckitemMapper {
 
-    public List<AssessCheckitem> getList();
+    public List<AssessCheckitem> checkitemList();
+
+    public List<AssessPartition> partitionList();
+
+    public List<AssessSelfevaluation> selfevaluationList();
+
+    public List<AssessSupervisor> supervisorList();
+
 
     public int addCheckitem(AssessCheckitem assessCheckitem);
 

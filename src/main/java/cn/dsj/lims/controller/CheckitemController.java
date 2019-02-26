@@ -13,15 +13,29 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/checkitem")
 public class CheckitemController {
     @Resource
     private CheckitemService checkitemService;
 
     //查询
-    @RequestMapping("/list")
-    public List<AssessCheckitem> getList() {
-        return checkitemService.getList();
+    @RequestMapping("/checkitemList")
+    public List<AssessCheckitem> checkitemList() {
+        return checkitemService.checkitemList();
+    }
+
+    @RequestMapping("/partitionList")
+    public List<AssessPartition> partitionList() {
+        return checkitemService.partitionList();
+    }
+
+    @RequestMapping("/selfevaluationList")
+    public List<AssessSelfevaluation> selfevaluationList() {
+        return checkitemService.selfevaluationList();
+    }
+
+    @RequestMapping("/supervisorList")
+    public List<AssessSupervisor> supervisorList() {
+        return checkitemService.supervisorList();
     }
 
     //添加
@@ -81,38 +95,42 @@ public class CheckitemController {
             return "true";
         return "false";
     }
+
     @RequestMapping("/updateSupervisor")
-    public String updateSupervisor(AssessSupervisor assessSupervisor){
+    public String updateSupervisor(AssessSupervisor assessSupervisor) {
         System.out.println("updateSupervisor..................");
-        if(checkitemService.updateSupervisor(assessSupervisor))
+        if (checkitemService.updateSupervisor(assessSupervisor))
             return "true";
         return "false";
     }
 
     //删除
     @RequestMapping("/deleteCheckitem")
-    public String deleteCheckitem(int id){
+    public String deleteCheckitem(int id) {
         System.out.println("deleteCheckitem......................");
-        if(checkitemService.deleteCheckitem(id))
+        if (checkitemService.deleteCheckitem(id))
             return "true";
         return "false";
     }
+
     @RequestMapping("/deletePartition")
-    public String deletePartition(int id){
+    public String deletePartition(int id) {
         System.out.println("deletePartition................");
-        if(checkitemService.deletePartition(id))
+        if (checkitemService.deletePartition(id))
             return "true";
         return "false";
     }
+
     @RequestMapping("/deleteSelfevaluation")
-    public String deleteSelfevaluation(int id){
+    public String deleteSelfevaluation(int id) {
         System.out.println("deleteSelfevaluation...........");
-        if(checkitemService.deleteSelfevaluation(id))
+        if (checkitemService.deleteSelfevaluation(id))
             return "true";
         return "false";
     }
+
     @RequestMapping("deleteSupervisor")
-    public String deleteSupervisor(int id){
+    public String deleteSupervisor(int id) {
         System.out.println("deleteSupervisor...............");
         if (checkitemService.deleteSupervisor(id))
             return "true";

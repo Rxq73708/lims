@@ -2,7 +2,6 @@ package cn.dsj.lims.pojo;
 
 public class AssessPartition {
     private int id;//序号
-    private int partitionId;//考核项目配分编号
     private int taskPartition1;//任务配分1
     private int taskPartition2;//任务配分2
     private int taskPartition3;//任务配分3
@@ -32,9 +31,8 @@ public class AssessPartition {
         super();
     }
 
-    public AssessPartition(int id, int partitionId, int taskPartition1, int taskPartition2, int taskPartition3, int taskPartition4, int quaPartition1, int quaPartition2, int quaPartition3, int quaPartition4, int skillPartition1, int skillPartition2, int skillPartition3, int skillPartition4, int attPartition1, int attPartition2, int attPartition3, int attPartition4, int harPartition1, int harPartition2, int harPartition3, int harPartition4, int disPartition1, int disPartition2, int disPartition3, int disPartition4) {
+    public AssessPartition(int id, int taskPartition1, int taskPartition2, int taskPartition3, int taskPartition4, int quaPartition1, int quaPartition2, int quaPartition3, int quaPartition4, int skillPartition1, int skillPartition2, int skillPartition3, int skillPartition4, int attPartition1, int attPartition2, int attPartition3, int attPartition4, int harPartition1, int harPartition2, int harPartition3, int harPartition4, int disPartition1, int disPartition2, int disPartition3, int disPartition4) {
         this.id = id;
-        this.partitionId = partitionId;
         this.taskPartition1 = taskPartition1;
         this.taskPartition2 = taskPartition2;
         this.taskPartition3 = taskPartition3;
@@ -67,14 +65,6 @@ public class AssessPartition {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getPartitionId() {
-        return partitionId;
-    }
-
-    public void setPartitionId(int partitionId) {
-        this.partitionId = partitionId;
     }
 
     public int getTaskPartition1() {

@@ -113,4 +113,16 @@ public class ViewController {
         System.out.println("reqTest...");
         return "reqTest";
     }
+
+    @RequestMapping("/schedule")
+    public String schedule(){
+        System.out.println("schedule...");
+        return "schedule";
+    }
+
+    @RequestMapping("/preserve")
+    public String preserve(){
+        System.out.println("preserve...");
+        return "preserve";
+    }
 }

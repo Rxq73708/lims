@@ -2,7 +2,6 @@ package cn.dsj.lims.pojo;
 
 public class AssessSelfevaluation {
     private int id;//序号
-    private int selfId;//考核项目自评编号
     private int taskSelf1;//任务自评1
     private int taskSelf2;//任务自评2
     private int taskSelf3;//任务自评3
@@ -32,9 +31,8 @@ public class AssessSelfevaluation {
         super();
     }
 
-    public AssessSelfevaluation(int id, int selfId, int taskSelf1, int taskSelf2, int taskSelf3, int taskSelf4, int quaSelf1, int quaSelf2, int quaSelf3, int quaSelf4, int skillSelf1, int skillSelf2, int skillSelf3, int skillSelf4, int attSelf1, int attSelf2, int attSelf3, int attSelf4, int harSelf1, int harSelf2, int harSelf3, int harSelf4, int disSelf1, int disSelf2, int disSelf3, int disSelf4) {
+    public AssessSelfevaluation(int id, int taskSelf1, int taskSelf2, int taskSelf3, int taskSelf4, int quaSelf1, int quaSelf2, int quaSelf3, int quaSelf4, int skillSelf1, int skillSelf2, int skillSelf3, int skillSelf4, int attSelf1, int attSelf2, int attSelf3, int attSelf4, int harSelf1, int harSelf2, int harSelf3, int harSelf4, int disSelf1, int disSelf2, int disSelf3, int disSelf4) {
         this.id = id;
-        this.selfId = selfId;
         this.taskSelf1 = taskSelf1;
         this.taskSelf2 = taskSelf2;
         this.taskSelf3 = taskSelf3;
@@ -67,14 +65,6 @@ public class AssessSelfevaluation {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getSelfId() {
-        return selfId;
-    }
-
-    public void setSelfId(int selfId) {
-        this.selfId = selfId;
     }
 
     public int getTaskSelf1() {

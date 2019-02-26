@@ -1,7 +1,7 @@
 package cn.dsj.lims.pojo;
 
 public class AssessCheckitem {
-    private int checkId;//考核项目编号
+    private int id;//考核项目编号
     private String task1;//工作任务1
     private String task2;//工作任务2
     private String task3;//工作任务3
@@ -31,8 +31,9 @@ public class AssessCheckitem {
         super();
     }
 
-    public AssessCheckitem(int checkId, String task1, String task2, String task3, String task4, String quality1, String quality2, String quality3, String quality4, String skill1, String skill2, String skill3, String skill4, String attitude1, String attitude2, String attitude3, String attitude4, String harmony1, String harmony2, String harmony3, String harmony4, String discipline1, String discipline2, String discipline3, String discipline4) {
-        this.checkId = checkId;
+
+    public AssessCheckitem(int id, String task1, String task2, String task3, String task4, String quality1, String quality2, String quality3, String quality4, String skill1, String skill2, String skill3, String skill4, String attitude1, String attitude2, String attitude3, String attitude4, String harmony1, String harmony2, String harmony3, String harmony4, String discipline1, String discipline2, String discipline3, String discipline4) {
+        this.id = id;
         this.task1 = task1;
         this.task2 = task2;
         this.task3 = task3;
@@ -59,12 +60,12 @@ public class AssessCheckitem {
         this.discipline4 = discipline4;
     }
 
-    public int getCheckId() {
-        return checkId;
+    public int getId() {
+        return id;
     }
 
-    public void setCheckId(int checkId) {
-        this.checkId = checkId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTask1() {

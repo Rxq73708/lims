@@ -1,5 +1,8 @@
 package cn.dsj.lims.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -18,18 +21,55 @@ public class Employee {
     private String workExperience;//工作经验
     private int deptId;//部门编号
     private int age;//年龄
+    private String nation;//民族
     private String email;//邮箱
+    private String phone;//电话
     private String address;//住址
     private String school;//毕业学校
     private String profession;//专业
-    private String educationBackgound;//学历
+    private String educationBackground;//学历
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date graduationDate;//毕业时间
     private String photo;//证件照
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;//生日
     private int marriage;//婚否
     private String award;//奖励情况
     private String punish;//处罚情况
     private int userId;//账户id
+    private String deptName;//部门名称
+
+    public Employee() {
+        super();
+    }
+
+    public Employee(int id, int staffId, String empName, char gender, String post, String workExperience, int deptId, int age, String nation, String email, String phone, String address, String school, String profession, String educationBackgound, Date graduationDate, String photo, Date birthday, int marriage, String award, String punish, int userId, String deptName) {
+        this.id = id;
+        this.staffId = staffId;
+        this.empName = empName;
+        this.gender = gender;
+        this.post = post;
+        this.workExperience = workExperience;
+        this.deptId = deptId;
+        this.age = age;
+        this.nation = nation;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.school = school;
+        this.profession = profession;
+        this.educationBackground = educationBackground;
+        this.graduationDate = graduationDate;
+        this.photo = photo;
+        this.birthday = birthday;
+        this.marriage = marriage;
+        this.award = award;
+        this.punish = punish;
+        this.userId = userId;
+        this.deptName = deptName;
+    }
 
     private String deptName;//部门名称
 
@@ -105,12 +145,28 @@ public class Employee {
         this.age = age;
     }
 
+    public String getNation() {
+        return nation;
+    }
+
+    public void setNation(String nation) {
+        this.nation = nation;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {
@@ -137,12 +193,12 @@ public class Employee {
         this.profession = profession;
     }
 
-    public String getEducationBackgound() {
-        return educationBackgound;
+    public String getEducationBackground() {
+        return educationBackground;
     }
 
-    public void setEducationBackgound(String educationBackgound) {
-        this.educationBackgound = educationBackgound;
+    public void setEducationBackground(String educationBackground) {
+        this.educationBackground = educationBackground;
     }
 
     public Date getGraduationDate() {
@@ -199,5 +255,13 @@ public class Employee {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 }

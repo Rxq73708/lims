@@ -17,11 +17,27 @@ import java.util.List;
 public class CheckitemServiceImpl implements CheckitemService{
     @Resource
     private CheckitemMapper checkitemMapper;
-    @Override
-    public List<AssessCheckitem> getList() {
-        return this.checkitemMapper.getList();
 
+    @Override
+    public List<AssessCheckitem> checkitemList() {
+        return checkitemMapper.checkitemList();
     }
+
+    @Override
+    public List<AssessPartition> partitionList() {
+        return checkitemMapper.partitionList();
+    }
+
+    @Override
+    public List<AssessSelfevaluation> selfevaluationList() {
+        return checkitemMapper.selfevaluationList();
+    }
+
+    @Override
+    public List<AssessSupervisor> supervisorList() {
+        return checkitemMapper.supervisorList();
+    }
+
     @Override
     public boolean addCheckitem(AssessCheckitem assessCheckitem) {
         if (checkitemMapper.addCheckitem(assessCheckitem)>0)

@@ -5,17 +5,24 @@
     <select id="getAssessList" resultType="Assess">
          select a.*,e.empName
     from Assess as a,employee as e
-    where a.assessId=e.staffId and empName like CONCAT('%',#{empName},'%')
+    where a.empId=e.id and empName like CONCAT('%',#{empName},'%')
     limit #{start},#{size};
 </select>
+    <select id="partitionList" resultType="Assess">
+         select a.*,e.empName
+    from Assess as a,employee as e
+    where a.empId=e.id and empName like CONCAT('%',#{empName},'%')
+    limit #{start},#{size};
+</select>
+
     <!--增加-->
 <insert id="assessAdd" >
-    insert into assess(assessId,assessDate,signature,details)
+    insert into assess(empId,assessDate,signature,details)
     values(#{assessId},#{assessDate},#{signature},#{details})
 </insert>
     <!--修改-->
     <update id="assessUpdate">
-update assess set assessId=#{assessId},assessDate=#{assessDate},signature=#{signature},details=#{details}
+update assess set empId=#{empId},assessDate=#{assessDate},signature=#{signature},details=#{details}
 where id=#{id};
     </update>
     <!--删除-->

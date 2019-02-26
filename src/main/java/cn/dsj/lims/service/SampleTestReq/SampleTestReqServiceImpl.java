@@ -32,6 +32,27 @@ public class SampleTestReqServiceImpl implements SampleTestReqService {
     }
 
     @Override
+    public boolean sampleTestReqAdd(SampleTestReq sampleTestReq) {
+        if(sampleTestReqMapper.sampleTestReqAdd(sampleTestReq)>0)
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean sampleTestReqUpdate(SampleTestReq sampleTestReq) {
+        if(sampleTestReqMapper.sampleTestReqUpdate(sampleTestReq)>0)
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean sampleTestReqDelete(int id) {
+        if(sampleTestReqMapper.sampleTestReqDelete(id)>0)
+            return true;
+        return false;
+    }
+
+    @Override
     public Map<String, Object> getSampleTestReq(int state, int pageNo, int pageSize) {
         Map<String, Object> map = new HashMap<>();
         int start = (pageNo - 1) * pageSize;
