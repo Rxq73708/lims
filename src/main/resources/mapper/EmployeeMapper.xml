@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.dsj.lims.dao.EmployeeMapper">
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="cn.dsj.lims.dao.EmployeeMapper">
 
     <select id="getEmployeeList" resultType="Employee">
-        select *from employee
+       SELECT e.`id`,e.`staffId`,e.`empName`,e.`gender`,d.`deptName` FROM employee e,dept d WHERE e.deptId=d.deptId
+    </select>
+    <select id="getOneByStaffId" resultType="Employee">
+        select * from employee where staffId=#{staffId}
     </select>
     <select id="getOneByUserId" resultType="Employee">
         select *from employee e,sys_user u
         where e.userid=u.id and u.id=#{userId}
     </select>
+
+    <insert id="addEmployee" parameterType="Employee">
+        insert into (staffId,empName,gender,post,workExperience,deptId,age,email,
+        address,school,profession,educationBackground,graduationDate,photo,
+        birthday,marriage,award,punish)
+        values (#{staffId},#{empName},#{gender},#{post},#{workExperience},
+        #{deptId},#{age},#{email},#{address},#{school},#{profession},
+        #{educationBackground},#{graduationDate},#{photo},#{birthday},
+        #{marriage},#{award},#{punish})
+    </insert>
+
+    <update id="updateEmployee" parameterType="Employee">
+  UPDATE employee SET id=#{id},staffId=#{staffId},empName=#{empName},gender=#{gender},
+  post=#{post},workExperience=#{workExperience},deptId=#{deptId},
+  age=#{age},phone=#{phone},email=#{email},address=#{address},school=#{school},
+  profession=#{profession},educationBackground=#{educationBackground},
+  graduationDate=#{graduationDate},photo=#{photo},birthday=#{birthday},
+  marriage=#{marriage},award=#{award},punish=#{punish},userId=#{userId}
+  WHERE id=#{id};
+    </update>
+
+    <delete id="deleteEmployee">
+        DELETE FROM employee WHERE staffId=#{staffId};
+    </delete>
+
 </mapper>
