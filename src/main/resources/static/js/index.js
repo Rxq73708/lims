@@ -15,7 +15,7 @@ $(function () {
                 $('#tt').tabs('add',{
                     title:$(this).text(),
                     cache:true,
-                    href:'/user',
+                    href:'/employees',
                     closable:true
                 });
             } else if($(this).text()=="部门组织结构"){
@@ -124,6 +124,13 @@ $(function () {
                     title:$(this).text(),
                     cache:true,
                     href:'/maintain',
+                    closable:true
+                });
+            }else if($(this).text()=='试剂管理'){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/consumable',
                     closable:true
                 });
             }else if($(this).text()=='保养记录'){

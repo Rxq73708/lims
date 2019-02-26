@@ -1,6 +1,8 @@
 package cn.dsj.lims.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -124,5 +126,22 @@ public class ViewController {
     public String preserve(){
         System.out.println("preserve...");
         return "preserve";
+    }
+    @RequestMapping("/employees")
+    public String employees(){
+        System.out.println("employees...");
+        return "employees";
+    }
+    @RequestMapping("/employeeDetails/{staffId}")
+    public String employeeDetails(Model model, @PathVariable int staffId){
+        System.out.println("employeeDetails...");
+        model.addAttribute("staffId",staffId);
+        return "employeeDetails";
+    }
+
+    @RequestMapping("/consumable")
+    public String consumable(){
+        System.out.println("consumable...");
+        return "consumable";
     }
 }
