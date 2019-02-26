@@ -21,4 +21,24 @@ public interface SampleTestReqService {
      * @return
      */
     boolean processing(int[] ids);
+    /**
+     * 添加
+     * @param sampleTestReq
+     * @return
+     */
+    public boolean sampleTestReqAdd(SampleTestReq sampleTestReq);
+
+    /**
+     * 修改
+     * @param sampleTestReq
+     * @return
+     */
+    public boolean sampleTestReqUpdate(SampleTestReq sampleTestReq);
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    public boolean sampleTestReqDelete(int id);
 }

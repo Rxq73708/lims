@@ -10,7 +10,13 @@ import java.util.List;
 
 
 public interface CheckitemService {
-    public List<AssessCheckitem> getList();
+    public List<AssessCheckitem> checkitemList();
+
+    public List<AssessPartition> partitionList();
+
+    public List<AssessSelfevaluation> selfevaluationList();
+
+    public List<AssessSupervisor> supervisorList();
 
     public boolean addCheckitem(AssessCheckitem assessCheckitem);
 

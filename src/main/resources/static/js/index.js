@@ -46,7 +46,24 @@ $(function () {
                     href:'/processedReq',
                     closable:true
                 });
-            } else if($(this).text()=="文库管理"){
+            }
+            else if($(this).text()=="检测进度"){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/schedule',
+                    closable:true
+                });
+            }
+            else if($(this).text()=="样品库存"){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/preserve',
+                    closable:true
+                });
+            }
+            else if($(this).text()=="文库管理"){
                 $('#tt').tabs('add',{
                     title:$(this).text(),
                     cache:true,

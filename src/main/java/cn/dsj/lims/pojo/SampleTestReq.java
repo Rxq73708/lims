@@ -14,27 +14,27 @@ import java.util.Objects;
  */
 public class SampleTestReq {
 
-    private int id;
-    private String sampleReqId;
-    private String userReq;
-    private Integer deptId;
+    private int id;//申请测试编号
+    private String sampleReqId;//检测申请表编号
+    private String userReq;//申请人
+    private Integer deptId;//部门id
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Timestamp reqDate;
-    private String sampleId;
-    private int count;
-    private Integer providerId;
-    private String itemId;
-    private Integer speed;
-    private String reqDesc;
-    private Integer state;
-    private Integer affirm;
-    private Date takeDate;
-    private Date detectionDate;
-    private Integer plan;
-    private Integer preserveCount;
-    private Integer storageLife;
-    private Integer clear;
-    private String sampleName;
+    private Timestamp reqDate;//申请时间
+    private String sampleId;//样品编号=sample表
+    private int count;//样品数量
+    private Integer providerId;//供应商id
+    private String itemId;//检测项目编号
+    private Integer speed;//1：正常/2：加急
+    private String reqDesc;//备注
+    private Integer state;//1.待处理/2.已处理
+    private Integer affirm;//1.确认收样/2.未收样
+    private Date takeDate;//收样时间
+    private Date detectionDate;//检测时间
+    private Integer plan;//1.检测进行中/2.完成检测
+    private Integer preserveCount;//留样数量
+    private Integer storageLife;//保存期限
+    private Integer clear;//1.清理/2.待清理
+    private String sampleName;//样品名称
 
     public String getSampleName() {
         return sampleName;

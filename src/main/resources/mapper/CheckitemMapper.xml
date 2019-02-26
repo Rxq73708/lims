@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.dsj.lims.dao.CheckitemMapper">
-    <select id="getList" resultType="assessCheckitem">
-        SELECT c.*,p.*,se.*,su.* FROM assess_checkitem AS c,`assess_partition` AS p,assess_selfevaluation AS se,assess_supervisor AS su
-                                  WHERE c.checkId = p.partitionId AND c.checkId = se.`selfId` AND c.checkId= su.supervisorId
+    <select id="checkitemList" resultType="AssessCheckitem">
+        SELECT * FROM assess_checkitem
     </select>
+    <select id="partitionList" resultType="AssessPartition">
+        SELECT * FROM assess_partition
+    </select>
+    <select id="selfevaluationList" resultType="AssessSelfevaluation">
+        SELECT * FROM assess_selfevaluation
+    </select>
+    <select id="supervisorList" resultType="AssessSupervisor">
+        SELECT * FROM assess_supervisor
+    </select>
+
     <insert id="addCheckitem">
         INSERT INTO `assess_checkitem`(`task1`,`task2`,`task3`,`task4`,`quality1`,`quality2`,`quality3`,`quality4`,`skill1`,`skill2`,`skill3`,`skill4`,`attitude1`,`attitude2`,`attitude3`,`attitude4`,`harmony1`,`harmony2`,`harmony3`,`harmony4`,`discipline1`,`discipline2`,`discipline3`,`discipline4`)
                               VALUES (#{task1},#{task2},#{task3},#{task4},#{quality1},#{quality2},#{quality3},#{quality4},#{skill1},#{skill2},#{skill3},#{skill4},#{attitude1},#{attitude2},#{attitude3},#{attitude4},#{harmony1},#{harmony2},#{harmony3},#{harmony4},#{discipline1},#{discipline2},#{discipline3},#{discipline4});

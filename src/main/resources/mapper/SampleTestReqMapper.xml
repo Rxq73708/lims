@@ -16,4 +16,21 @@
             #{id}
         </foreach>
     </update>
+    <!--增加-->
+    <insert id="sampleTestReqAdd">
+    insert into sample_test_req(sampleReqId,sampleId,count,speed,plan,userReq,reqDate,reqDesc)
+    values(#{sampleReqId},#{sampleId},#{count},#{speed},#{plan},#{userReq},#{reqDate},#{reqDesc})
+</insert>
+    <!--修改-->
+    <!-- <update id="assessUpdate">
+ update sample_test_req set sampleReqId=#{sampleReqId},sampleId=#{sampleId},count=#{count},speed=#{speed},
+ plan=#{plan},userReq=#{userReq},reqDate=#{reqDate},reqDesc=#{reqDesc}}
+ where id=#{id};
+     </update>-->
+    <!--删除-->
+    <delete id="sampleTestReqDelete">
+delete from SampleTestReq where id=#{id};
+</delete>
+
+
 </mapper>

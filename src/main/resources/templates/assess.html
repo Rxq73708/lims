@@ -11,7 +11,7 @@
             var row =$('#assess_dg').edatagrid('getSelected');
             var rowIndex=$('#assess_dg').edatagrid('getRowIndex',row);
             var ed= $('#assess_dg').edatagrid('getEditor',{index:rowIndex,field:'empName'});
-            var proName=$(ed.target).combobox('getValue');
+            var empName=$(ed.target).combobox('getValue');
             var comboxData=$(this).combobox('getData');
             for(var i=0;i<comboxData.length;i++){
                 if(comboxData[i].empName==empName){

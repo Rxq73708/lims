@@ -24,4 +24,26 @@ public interface SampleTestReqMapper {
      * @return
      */
     int processing(int[] ids);
+
+    /**
+     * 添加
+     * @param sampleTestReq
+     * @return
+     */
+    public int sampleTestReqAdd(SampleTestReq sampleTestReq);
+
+    /**
+     * 修改
+     * @param sampleTestReq
+     * @return
+     */
+    public int sampleTestReqUpdate(SampleTestReq sampleTestReq);
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    public int sampleTestReqDelete(int id);
+
 }

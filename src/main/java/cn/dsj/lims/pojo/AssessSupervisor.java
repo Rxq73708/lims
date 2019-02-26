@@ -2,7 +2,6 @@ package cn.dsj.lims.pojo;
 
 public class AssessSupervisor {
     private int id;//上级审核表序号
-    private int supervisorId;//上级审核编号
     private int taskSupervisor1;//上级审核任务1
     private int taskSupervisor2;//上级审核任务2
     private int taskSupervisor3;//上级审核任务3
@@ -32,9 +31,8 @@ public class AssessSupervisor {
         super();
     }
 
-    public AssessSupervisor(int id, int supervisorId, int taskSupervisor1, int taskSupervisor2, int taskSupervisor3, int taskSupervisor4, int quaSupervisor1, int quaSupervisor2, int quaSupervisor3, int quaSupervisor4, int skillSupervisor1, int skillSupervisor2, int skillSupervisor3, int skillSupervisor4, int attSupervisor1, int attSupervisor2, int attSupervisor3, int attSupervisor4, int harSupervisor1, int harSupervisor2, int harSupervisor3, int harSupervisor4, int disSupervisor1, int disSupervisor2, int disSupervisor3, int disSupervisor4) {
+    public AssessSupervisor(int id, int taskSupervisor1, int taskSupervisor2, int taskSupervisor3, int taskSupervisor4, int quaSupervisor1, int quaSupervisor2, int quaSupervisor3, int quaSupervisor4, int skillSupervisor1, int skillSupervisor2, int skillSupervisor3, int skillSupervisor4, int attSupervisor1, int attSupervisor2, int attSupervisor3, int attSupervisor4, int harSupervisor1, int harSupervisor2, int harSupervisor3, int harSupervisor4, int disSupervisor1, int disSupervisor2, int disSupervisor3, int disSupervisor4) {
         this.id = id;
-        this.supervisorId = supervisorId;
         this.taskSupervisor1 = taskSupervisor1;
         this.taskSupervisor2 = taskSupervisor2;
         this.taskSupervisor3 = taskSupervisor3;
@@ -67,14 +65,6 @@ public class AssessSupervisor {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getSupervisorId() {
-        return supervisorId;
-    }
-
-    public void setSupervisorId(int supervisorId) {
-        this.supervisorId = supervisorId;
     }
 
     public int getTaskSupervisor1() {

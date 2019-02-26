@@ -25,14 +25,38 @@ public class SampleTestReqController {
     private SampleTestReqService sampleTestReqService;
 
     @RequestMapping("/state/{value}")
-    Map<String,Object> pendingProcessingList(@PathVariable("value") int state, int page, int rows){
-        return sampleTestReqService.getSampleTestReq(state,page,rows);
+    Map<String, Object> pendingProcessingList(@PathVariable("value") int state, int page, int rows) {
+        return sampleTestReqService.getSampleTestReq(state, page, rows);
     }
 
     @RequestMapping("/processing")
-    boolean processing(@RequestParam("ids[]") int[] ids){
-        for(int id:ids)
-            System.out.println("id:"+id);
+    boolean processing(@RequestParam("ids[]") int[] ids) {
+        for (int id : ids)
+            System.out.println("id:" + id);
         return sampleTestReqService.processing(ids);
     }
+
+    @RequestMapping("/add")
+    public String sampleTestReqAdd(SampleTestReq sampleTestReq) {
+        //assess.setAssessId(Integer.parseInt(assess.getEmpName()));
+        sampleTestReq.setSampleId(sampleTestReq.getSampleName());
+        System.out.println("insert......");
+        if (sampleTestReqService.sampleTestReqAdd(sampleTestReq))
+            return "turn";
+        return "false";
+    }
+    @RequestMapping("/update")
+    public String sampleTeatReqUpdate(SampleTestReq sampleTestReq) {
+
+        if (sampleTestReqService.sampleTestReqUpdate(sampleTestReq))
+            return "ture";
+        return "false";
+    }
+    @RequestMapping("/delete")
+    public String sampleTeatReqDelete(@RequestParam(value = "id", required = true) int id) {
+        if (sampleTestReqService.sampleTestReqDelete(id))
+            return "ture";
+        return "false";
+    }
+
 }
