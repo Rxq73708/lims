@@ -1,7 +1,11 @@
 package cn.dsj.lims.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Description：
@@ -107,4 +111,17 @@ public class ViewController {
         System.out.println("structure...");
         return "structure";
     }
+    @RequestMapping("/employees")
+    public String employeess(){
+        System.out.println("employees.........");
+        return "employees";
+    }
+    @RequestMapping("/employeeDetails/{staffId}")
+    public String employeeDetails(Model model, @PathVariable int staffId){
+        System.out.println("employeeDetails...");
+        model.addAttribute("staffId",staffId);
+        return "employeeDetails";
+    }
+
+
 }
