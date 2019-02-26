@@ -6,7 +6,9 @@
         select *from employee
     </select>
     <select id="getOneByUserId" resultType="Employee">
-        select *from employee e,sys_user u
-        where e.userid=u.id and u.id=#{userId}
+        select *from employee e,sys_user u,dept d
+        where e.userid=u.id
+        and e.deptId=d.deptId
+        and u.id=#{userId}
     </select>
 </mapper>

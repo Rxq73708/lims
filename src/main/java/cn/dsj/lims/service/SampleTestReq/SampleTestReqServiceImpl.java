@@ -40,4 +40,11 @@ public class SampleTestReqServiceImpl implements SampleTestReqService {
         map.put("total", total);
         return map;
     }
+
+    @Override
+    public boolean addSampleTestReq(SampleTestReq sampleTestReq) {
+        if(sampleTestReqMapper.addSampleTestReq(sampleTestReq)>0)
+            return true;
+        return false;
+    }
 }

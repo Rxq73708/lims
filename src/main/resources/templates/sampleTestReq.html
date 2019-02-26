@@ -17,7 +17,7 @@
                 {field:'itemId',title:'检测项目编号',width:100,hidden:'true'},
                 {field:'sampleId',title:'样品编号',width:100},
                 {field:'count',title:'样品数量',width:100},
-                {field:'userReq',title:'申请人',width:100},
+                {field:'staffId',title:'申请人',width:100},
                 {field:'reqDate',title:'申请时间',width:100}
             ]
         ],
@@ -151,5 +151,9 @@
                 }
             });
         }
+    }
+
+    window.top["Refresh_SampleTestReq_Content"] = function () {
+        $('#sampleTestReq_dg').datagrid('reload')
     }
 </script>

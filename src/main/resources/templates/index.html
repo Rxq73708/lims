@@ -35,6 +35,7 @@
 <body class="easyui-layout">
 <!-- 布局中如果不需要north这个面板，那么可以删掉这个div -->
 <div data-options="region:'north',title:'大数据16LIMS实验室管理系统',split:true" style="height:100px;">
+    <span id="userId" hidden><shiro:principal property="id"/></span>
     <span>欢迎你，<shiro:principal property="username"/></span>
     <a href="/logout" class="easyui-linkbutton">安全退出</a>
 </div>
@@ -56,6 +57,7 @@
         </div>
         <div title="样品管理" style="padding:10px;">
             <ul>
+                <li><a href="">申请检测</a></li>
                 <li><a href="">待处理检测申请</a></li>
                 <li><a href="">已处理检测申请</a></li>
                 <li><a href="">检测测试进度</a></li>

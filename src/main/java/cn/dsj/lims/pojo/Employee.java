@@ -31,6 +31,16 @@ public class Employee {
     private String punish;//处罚情况
     private int userId;//账户id
 
+    private String deptName;//部门名称
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
     public int getId() {
         return id;
     }

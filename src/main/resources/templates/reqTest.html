@@ -1,0 +1,287 @@
+<style>
+    .reqform {
+        width: 540px;
+        height: 380px;
+        text-align: center;
+        margin: 10px auto;
+        border: #99cdff 1px solid;
+        padding: 20px;
+    }
+
+    .contetn-left {
+        float: left;
+    }
+
+    .content-right {
+        float: right;
+    }
+
+    .content-bottom {
+        margin-top: 100px;
+    }
+
+    .contetn-left div, .content-right div {
+        margin-bottom: 10px;
+    }
+
+    .reqform input {
+        width: 250px;
+    }
+
+    .contetn-left-col div:first-child {
+        text-align: left;
+    }
+
+    #checkItem {
+        width: fit-content;
+    }
+</style>
+<div style="text-align: center">
+    <h2>检测申请单（客户）</h2>
+</div>
+<div class="reqform">
+    <div class="contetn-left">
+        <div class="contetn-left-col">
+            <div>申请部门</div>
+            <input id="deptName" readonly>
+        </div>
+        <div class="contetn-left-col">
+            <div>申请人</div>
+            <input id="empName" readonly>
+        </div>
+        <div class="contetn-left-col">
+            <div>申请时间</div>
+            <div>
+                <input id="reqDate" type="text" readonly>
+            </div>
+        </div>
+        <div class="contetn-left-col">
+            <div>供应商</div>
+            <input id="proName" required>
+        </div>
+        <div class="contetn-left-col">
+            <div>是否加急</div>
+            <div id="div1">
+                <input name="speed" type="radio" value="1">是
+                <input name="speed" type="radio" value="2" checked>否
+            </div>
+        </div>
+        <div class="contetn-left-col">
+            <button id="submit">提交</button>
+        </div>
+    </div>
+    <div class="content-right">
+        <div class="contetn-left-col">
+            <div>检测样品</div>
+            <div>
+                <input id="sampleName" class="easyui-validatebox" data-options="required:true">
+            </div>
+        </div>
+        <div class="contetn-left-col level1" hidden>
+            <div>一级分类</div>
+            <div>
+                <input id="level1" class="easyui-validatebox" data-options="required:true">
+            </div>
+        </div>
+        <div class="contetn-left-col level2" hidden>
+            <div>二级分类</div>
+            <div>
+                <input id="level2" class="easyui-validatebox" data-options="required:true">
+            </div>
+        </div>
+        <div class="contetn-left-col">
+            <div>样品数量</div>
+            <div>
+                <input id="sampleCount" class="easyui-numberspinner" value="1"
+                       data-options="min:1,max:6,editable:false">
+            </div>
+        </div>
+        <div class="contetn-left-col checkItem" hidden>
+            <div>检测项目</div>
+            <div id="checkItem">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        //提交的数据
+        var submitData={};
+
+        $('input[type="radio"]').css('width', '20px');
+        $('#div1').css('text-align', 'left');
+
+        $('#submit').click(reqDetection);
+
+        //为供应商下拉列表提供值
+        $('#proName').combobox({
+            url: '/provider/list',
+            valueField: 'id',
+            textField: 'proName',
+            editable: false,
+            panelHeight: 'auto',
+            onSelect:function (rec) {
+                submitData.providerId= rec.id;
+            }
+        });
+
+        //为检验样品下拉列表提供值
+        $('#sampleName').combobox({
+            url: '/sample/list/1/0',
+            valueField: 'id',
+            textField: 'sampleName',
+            editable: false,
+            panelHeight: 'auto',
+            onSelect: function (rec) {
+                submitData.sampleId=rec.id;
+                $('.contetn-left-col.level1').hide();
+                $('.contetn-left-col.level2').hide();
+                $('.contetn-left-col.checkItem').hide();
+                $('#level1').combobox({
+                    url: '/sample/list/2/' + rec.id,
+                    valueField: 'id',
+                    textField: 'sampleName',
+                    editable: false,
+                    panelHeight: 'auto',
+                    onLoadSuccess: function (data) {
+                        if (data.length > 0) {
+                            $('.contetn-left-col.level1').show();
+                        } else {
+                            submitData.sampleId=rec.id;
+                            checkItem(rec.id);
+                            $('.contetn-left-col.checkItem').show();
+                        }
+                    },
+                    onSelect: function (rec) {
+                        $('.contetn-left-col.checkItem').hide();
+                        $('#level2').combobox({
+                            url: '/sample/list/3/' + rec.id,
+                            valueField: 'id',
+                            textField: 'sampleName',
+                            editable: false,
+                            panelHeight: 'auto',
+                            onLoadSuccess: function (data) {
+                                if (data.length > 0)
+                                    $('.contetn-left-col.level2').show();
+                            },
+                            onSelect: function (rec) {
+                                submitData.sampleId=rec.id;
+                                checkItem(rec.id);
+                                $('.clearfloat').css({
+                                    clear: 'both',
+                                    height: '1px',
+                                    width: '100%',
+                                    overflow: 'hidden',
+                                    'margin-top': '-1px'
+                                });
+                                $('.contetn-left-col.checkItem').show();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        //获取申请人和所在的部门
+        $.get('/employee/userId/' + $('#userId').text(), function (data) {
+            $('#deptName').val(data.deptName);
+            $('#empName').val(data.empName);
+            submitData.deptId=data.deptId;
+            submitData.staffId=data.staffId;
+        });
+
+        //设置申请时间为当前日期
+        var currentDate = new Date();
+        var year = (currentDate.getFullYear()).toString();
+        var month = (currentDate.getMonth() + 1).toString();
+        var day = (currentDate.getDate()).toString();
+        function timeAdd0(str) {
+            if(str.length<=1){
+                str='0'+str;
+            }
+            return str
+        }
+        month=timeAdd0(month);
+        day=timeAdd0(day);
+        $('#reqDate').val(year + '-' + month + '-' + day);
+
+        //显示检测项目
+        function checkItem(sampleId) {
+            $.get('/detectionItem/sampleId/' + sampleId, function (data) {
+                var htmlStr = '';
+                $.each(data, function (i, n) {
+                    if (i % 2 == 0) {
+                        htmlStr += '<div>';
+                    }
+                    var float = 'left';
+                    if (i % 2 != 0)
+                        float = 'right';
+                    htmlStr += '<div style="text-align: left;width:120px;float:' + float + '">' +
+                        '<label><input type="checkbox" name="checkItem" value="' + n.id + '">' + n.itemName +
+                        '</label></div>';
+                    if (i % 2 != 0) {
+                        htmlStr += '</div>';
+                    }
+                });
+                if (data.length % 2 == 1) {
+                    htmlStr += '</div><div class="clearfloat"></div>';
+                }
+                $('#checkItem').html(htmlStr);
+                $('#checkItem input').css({width: '16px'});
+            })
+        }
+
+        //申请检测
+        function reqDetection() {
+            submitData.reqDate=$('#reqDate').val();
+            submitData.speed=$('input:radio[name="speed"]:checked').val();
+            submitData.count=$('#sampleCount').numberspinner('getValue');
+            submitData.sampleReqId=submitData.deptId+year+month+day;
+            var chk_val=[];
+            var flag=true;
+            $('input[name="checkItem"]:checked').each(function () {
+                chk_val.push($(this).val());
+            });
+            submitData.itemId=chk_val;
+            if(Object.keys(submitData).length!=9)
+                return;
+            $.each(submitData,function (i,o) {
+                if(o==null||o==''||o==undefined)
+                    flag=false;
+                else if(o.length==0){
+                    alert('请选择检测项目！');
+                    flag=false;
+                }
+                return;
+            });
+            if(flag){
+                submitData.itemId=submitData.itemId.join(',');
+                console.info(submitData);
+                $.post('/sampleTestReq/add',submitData,function (data) {
+                    if(data==true){
+                        $.messager.show({
+                            title:'申请消息',
+                            msg:'检测申请成功！',
+                            showType:'show'
+                        });
+                        //获得当前选中的tab
+                        var tab = $('#tt').tabs('getSelected');
+                        //获得当前选中的tab 的href
+                        var url = $(tab.panel('options')).attr('href');
+                        tab.panel('refresh', url);
+
+                        parent.RefreshCloudHomePageTab("待处理检测申请");
+                    }
+                    else {
+                        $.messager.show({
+                            title:'申请消息',
+                            msg:'检测申请成功！',
+                            showType:'show'
+                        });
+                    }
+                });
+            }
+        }
+    });
+</script>

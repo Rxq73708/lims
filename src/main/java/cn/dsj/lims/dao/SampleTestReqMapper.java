@@ -24,4 +24,11 @@ public interface SampleTestReqMapper {
      * @return
      */
     int processing(int[] ids);
+
+    /**
+     * 添加检测申请
+     * @param sampleTestReq
+     * @return
+     */
+    int addSampleTestReq(SampleTestReq sampleTestReq);
 }

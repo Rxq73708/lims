@@ -32,6 +32,13 @@ $(function () {
                     href:'/systems',
                     closable:true
                 });
+            } else if($(this).text()=="申请检测"){
+                $('#tt').tabs('add',{
+                    title:$(this).text(),
+                    cache:true,
+                    href:'/reqTest',
+                    closable:true
+                });
             } else if($(this).text()=="待处理检测申请"){
                 $('#tt').tabs('add',{
                     title:$(this).text(),
@@ -127,8 +134,13 @@ function removePanel() {
         var tab = $('#tt').tabs('close',$('.tabs-selected').text());
 }
 
+//刷新tab的方法
 function RefreshCloudHomePageTab(title) {
     if ($("#tt").tabs('exists', title)) {
-        window.top.Refresh_CloudHomePage_Content.call();
+        if(title=='待处理检测申请'){
+            window.top.Refresh_SampleTestReq_Content.call();
+        }else if(title=='已处理检测申请'){
+            window.top.Refresh_ProcessedReq_Content.call();
+        }
     }
 }

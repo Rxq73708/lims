@@ -35,4 +35,9 @@ public class SampleTestReqController {
             System.out.println("id:"+id);
         return sampleTestReqService.processing(ids);
     }
+
+    @RequestMapping("/add")
+    boolean addSampleTestReq(SampleTestReq sampleTestReq){
+        return sampleTestReqService.addSampleTestReq(sampleTestReq);
+    }
 }

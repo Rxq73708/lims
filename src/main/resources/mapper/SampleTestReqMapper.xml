@@ -16,4 +16,9 @@
             #{id}
         </foreach>
     </update>
+
+    <insert id="addSampleTestReq">
+      insert into sample_test_req(sampleReqId, staffId, deptId, reqDate, sampleId, count, providerId, itemId, speed)
+      value (#{sampleReqId}, #{staffId}, #{deptId}, #{reqDate}, #{sampleId}, #{count}, #{providerId}, #{itemId}, #{speed})
+    </insert>
 </mapper>

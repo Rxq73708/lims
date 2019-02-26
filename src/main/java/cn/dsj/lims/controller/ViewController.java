@@ -107,4 +107,10 @@ public class ViewController {
         System.out.println("structure...");
         return "structure";
     }
+
+    @RequestMapping("/reqTest")
+    public String reqTest(){
+        System.out.println("reqTest...");
+        return "reqTest";
+    }
 }

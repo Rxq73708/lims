@@ -2,6 +2,7 @@ package cn.dsj.lims.controller;
 
 import cn.dsj.lims.pojo.Employee;
 import cn.dsj.lims.service.Employee.EmployeeService;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,13 +17,18 @@ import java.util.List;
  * @create 2019/1/18
  */
 @RestController
-
+@RequestMapping("/employee")
 public class EmployeeController {
     @Resource
     private EmployeeService employeeService;
 
-    @RequestMapping("/employee")
+    @RequestMapping("/list")
     public List<Employee> getEmployeeList(Employee employee) {
         return employeeService.getEmployeeList();
+    }
+
+    @RequestMapping("/userId/{userId}")
+    public Employee getEmployee(@PathVariable("userId") int userId){
+        return employeeService.getOneByUserId(userId);
     }
 }

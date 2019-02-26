@@ -1,10 +1,8 @@
 package cn.dsj.lims.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.Objects;
+import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Date;
 
 /**
  * Description：
@@ -16,13 +14,14 @@ public class SampleTestReq {
 
     private int id;
     private String sampleReqId;
-    private String userReq;
+    private String staffId;
     private Integer deptId;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Timestamp reqDate;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date reqDate;
     private String sampleId;
     private int count;
-    private Integer providerId;
+    private String providerId;
     private String itemId;
     private Integer speed;
     private String reqDesc;
@@ -60,12 +59,12 @@ public class SampleTestReq {
         this.sampleReqId = sampleReqId;
     }
 
-    public String getUserReq() {
-        return userReq;
+    public String getStaffId() {
+        return staffId;
     }
 
-    public void setUserReq(String userReq) {
-        this.userReq = userReq;
+    public void setStaffId(String staffId) {
+        this.staffId = staffId;
     }
 
     public Integer getDeptId() {
@@ -76,11 +75,11 @@ public class SampleTestReq {
         this.deptId = deptId;
     }
 
-    public Timestamp getReqDate() {
+    public Date getReqDate() {
         return reqDate;
     }
 
-    public void setReqDate(Timestamp reqDate) {
+    public void setReqDate(Date reqDate) {
         this.reqDate = reqDate;
     }
 
@@ -100,11 +99,11 @@ public class SampleTestReq {
         this.count = count;
     }
 
-    public Integer getProviderId() {
+    public String getProviderId() {
         return providerId;
     }
 
-    public void setProviderId(Integer providerId) {
+    public void setProviderId(String providerId) {
         this.providerId = providerId;
     }
 

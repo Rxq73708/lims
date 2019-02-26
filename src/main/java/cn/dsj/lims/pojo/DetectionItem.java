@@ -13,11 +13,11 @@ public class DetectionItem {
 
     private int id;
     private String itemName;
-    private Integer sampleId;
+    private String sampleId;
 
     public DetectionItem(){}
 
-    public DetectionItem(int id, String itemName, Integer sampleId) {
+    public DetectionItem(int id, String itemName, String sampleId) {
         this.id = id;
         this.itemName = itemName;
         this.sampleId = sampleId;
@@ -39,11 +39,11 @@ public class DetectionItem {
         this.itemName = itemName;
     }
 
-    public Integer getSampleId() {
+    public String getSampleId() {
         return sampleId;
     }
 
-    public void setSampleId(Integer sampleId) {
+    public void setSampleId(String sampleId) {
         this.sampleId = sampleId;
     }
 }

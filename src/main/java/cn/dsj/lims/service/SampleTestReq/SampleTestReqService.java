@@ -21,4 +21,11 @@ public interface SampleTestReqService {
      * @return
      */
     boolean processing(int[] ids);
+
+    /**
+     * 添加检测申请
+     * @param sampleTestReq
+     * @return
+     */
+    boolean addSampleTestReq(SampleTestReq sampleTestReq);
 }
